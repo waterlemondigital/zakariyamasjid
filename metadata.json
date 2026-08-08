@@ -1,0 +1,6 @@
+{
+  "name": "Zakariya Masjid & Kabrastan Trust",
+  "description": "Official website for Zakariya Masjid & Kabrastan Trust in Pune, India. A registered charitable trust providing worship, cemetery services, and community welfare.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

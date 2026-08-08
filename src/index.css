@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-green: #0F4C36;
+  --color-secondary-emerald: #1C6B4A;
+  --color-accent-gold: #D4AF37;
+  --color-gold-dark: #B8860B;
+  --color-gold-light: #F3E5AB;
+  --color-gold-deep: #8C620B;
+  --color-ivory: #FAF7F0;
+  --color-charcoal: #22261F;
+
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-arabic: 'Amiri', 'Scheherazade New', serif;
+}
+
+/* Mosque Arch & Decorative Utilities */
+.arch-top {
+  border-top-left-radius: 120px;
+  border-top-right-radius: 120px;
+}
+
+.arch-top-lg {
+  border-top-left-radius: 180px;
+  border-top-right-radius: 180px;
+}
+
+.arch-window {
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+}
+
+/* Islamic Pointed Ogee Arch Clip Path */
+.clip-arch-pointed {
+  clip-path: polygon(50% 0%, 85% 15%, 100% 35%, 100% 100%, 0% 100%, 0% 35%, 15% 15%);
+}
+
+/* Metallic Gold Gradients & Text */
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 40%, #F5E0A3 60%, #AA7C11 100%);
+}
+
+.gold-gradient-dark-bg {
+  background: linear-gradient(135deg, #0F4C36 0%, #155A41 50%, #0B3A29 100%);
+}
+
+.gold-metallic-text {
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 35%, #F5E0A3 65%, #996515 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-light-text {
+  background: linear-gradient(135deg, #FFF5D1 0%, #F3E5AB 50%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Islamic Geometric Star Pattern (Rub el Hizb 8-Point Star Tessellation) */
+.islamic-pattern-subtle {
+  background-color: #FAF7F0;
+  background-image: radial-gradient(rgba(212, 175, 55, 0.25) 1.2px, transparent 1.2px), 
+                    radial-gradient(rgba(184, 134, 11, 0.2) 1.2px, #FAF7F0 1.2px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+}
+
+.islamic-pattern-dark {
+  background-color: #0F4C36;
+  background-image: 
+    radial-gradient(rgba(212, 175, 55, 0.25) 1.5px, transparent 1.5px),
+    linear-gradient(to right, rgba(212, 175, 55, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.islamic-star-border {
+  border-image: linear-gradient(to right, #B8860B, #F3E5AB, #D4AF37, #8C620B) 1;
+}
+
+/* Metallic Shimmer Animations for Islamic Aesthetic Buttons */
+@keyframes metallic-sweep {
+  0% {
+    transform: translateX(-150%) rotate(25deg);
+  }
+  100% {
+    transform: translateX(150%) rotate(25deg);
+  }
+}
+
+@keyframes pulse-gold-glow {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.65);
+  }
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold-glow 3s infinite ease-in-out;
+}
+
+/* Interactive Islamic Gold Button Styles */
+.btn-islamic-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #996515 100%);
+  color: #0F4C36;
+  font-weight: 800;
+  border: 1px solid #F5E0A3;
+  box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-islamic-gold::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%) rotate(25deg);
+  transition: transform 0.8s ease-out;
+}
+
+.btn-islamic-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+  background: linear-gradient(135deg, #C59B27 0%, #F3E5AB 50%, #B8860B 100%);
+}
+
+.btn-islamic-gold:hover::before {
+  transform: translateX(100%) rotate(25deg);
+}
+
+.btn-islamic-green {
+  position: relative;
+  overflow: hidden;
+  background: #0F4C36;
+  color: #FFFFFF;
+  font-weight: 700;
+  border: 1.5px solid #D4AF37;
+  box-shadow: 0 4px 15px rgba(15, 76, 54, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-islamic-green::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(212, 175, 55, 0.35) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%) rotate(25deg);
+  transition: transform 0.8s ease-out;
+}
+
+.btn-islamic-green:hover {
+  transform: translateY(-2px);
+  border-color: #F5E0A3;
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+  background: #155A41;
+}
+
+.btn-islamic-green:hover::before {
+  transform: translateX(100%) rotate(25deg);
+}
+
+.btn-islamic-outline {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  color: #0F4C36;
+  font-weight: 700;
+  border: 1.5px solid #D4AF37;
+  transition: all 0.3s ease;
+}
+
+.btn-islamic-outline:hover {
+  background: #0F4C36;
+  color: #F3E5AB;
+  border-color: #F3E5AB;
+  box-shadow: 0 6px 20px rgba(15, 76, 54, 0.3);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #0F4C36;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
