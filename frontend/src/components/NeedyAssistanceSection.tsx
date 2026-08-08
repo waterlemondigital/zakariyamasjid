@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Phone, Send, CheckCircle2, HelpCircle, AlertCircle, HeartHandshake, ShieldCheck, User, MapPin, FileText } from 'lucide-react';
+import { Phone, Send, CheckCircle2, HeartHandshake, ShieldCheck, User, MapPin, FileText } from 'lucide-react';
 
 export const NeedyAssistanceSection: React.FC = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
-    category: 'Ration & Food Support',
-    urgency: 'Normal',
     address: '',
     description: '',
   });
@@ -39,8 +37,6 @@ export const NeedyAssistanceSection: React.FC = () => {
       setFormData({
         fullName: '',
         phone: '',
-        category: 'Ration & Food Support',
-        urgency: 'Normal',
         address: '',
         description: '',
       });
@@ -229,46 +225,6 @@ export const NeedyAssistanceSection: React.FC = () => {
                       placeholder="e.g. +91 98230 00000"
                       className="w-full bg-[#FAF7F0] border border-[#D4AF37]/50 rounded-xl px-4 py-2.5 text-sm text-[#22261F] focus:outline-none focus:ring-2 focus:ring-[#0F4C36]/50 focus:border-[#0F4C36] transition-all"
                     />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  {/* Type of Assistance */}
-                  <div className="space-y-1.5">
-                    <label className="block text-xs font-bold text-[#0F4C36] uppercase tracking-wider flex items-center gap-1.5">
-                      <HelpCircle className="w-3.5 h-3.5 text-[#D4AF37]" /> Type of Support Required *
-                    </label>
-                    <select
-                      name="category"
-                      value={formData.category}
-                      onChange={handleChange}
-                      className="w-full bg-[#FAF7F0] border border-[#D4AF37]/50 rounded-xl px-4 py-2.5 text-sm text-[#22261F] focus:outline-none focus:ring-2 focus:ring-[#0F4C36]/50 focus:border-[#0F4C36] transition-all"
-                    >
-                      <option value="Ration & Food Support">Ration &amp; Essential Food Packet</option>
-                      <option value="Emergency Medical Relief">Emergency Medical / Hospital Relief</option>
-                      <option value="Sadaqah & Financial Aid">Sadaqah &amp; General Financial Support</option>
-                      <option value="Zakat Beneficiary Application">Zakat Beneficiary Assistance</option>
-                      <option value="Janazah / Burial Expenses">Janazah &amp; Burial Support</option>
-                      <option value="Madrasa / School Fees Aid">Madrasa &amp; School Education Fees</option>
-                      <option value="Other Emergency Need">Other Urgent Necessity</option>
-                    </select>
-                  </div>
-
-                  {/* Urgency Level */}
-                  <div className="space-y-1.5">
-                    <label className="block text-xs font-bold text-[#0F4C36] uppercase tracking-wider flex items-center gap-1.5">
-                      <AlertCircle className="w-3.5 h-3.5 text-[#D4AF37]" /> Urgency Level
-                    </label>
-                    <select
-                      name="urgency"
-                      value={formData.urgency}
-                      onChange={handleChange}
-                      className="w-full bg-[#FAF7F0] border border-[#D4AF37]/50 rounded-xl px-4 py-2.5 text-sm text-[#22261F] focus:outline-none focus:ring-2 focus:ring-[#0F4C36]/50 focus:border-[#0F4C36] transition-all"
-                    >
-                      <option value="Normal">Normal (Within 3-5 days)</option>
-                      <option value="High">High Priority (Within 24-48 hours)</option>
-                      <option value="Critical Emergency">Critical Emergency (Immediate response needed)</option>
-                    </select>
                   </div>
                 </div>
 
