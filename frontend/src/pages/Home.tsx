@@ -4,10 +4,8 @@ import { Hero } from '../components/Hero';
 import { SectionDivider } from '../components/SectionDivider';
 import { ArchFrame } from '../components/ArchFrame';
 import { TrustBadge } from '../components/TrustBadge';
-import { StatCounter } from '../components/StatCounter';
 import { MapEmbed } from '../components/MapEmbed';
 import { CTASection } from '../components/CTASection';
-import { donationCategoriesList } from '../components/DonationForm';
 import { DailyVerseWidget } from '../components/DailyVerseWidget';
 import { HomePrayerWidget } from '../components/HomePrayerWidget';
 import { JanazahQuickBar } from '../components/JanazahQuickBar';
@@ -311,66 +309,7 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 12. Donation Categories Preview */}
-      <section className="py-16 bg-white text-[#22261F] relative overflow-hidden border-t border-b border-[#D4AF37]/30">
-        <div className="absolute inset-0 islamic-pattern-subtle opacity-40"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4 border-b border-[#D4AF37]/40 pb-6">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#B8860B] block mb-1">
-                Sadaqah Jariyah &amp; Zakat
-              </span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#0F4C36]">
-                Support Masjid &amp; Community Causes
-              </h2>
-            </div>
-            <Link
-              to="/donate"
-              className="btn-islamic-gold px-6 py-3 rounded-xl font-bold text-sm inline-flex items-center gap-2 self-start md:self-auto shadow-md hover:shadow-lg"
-            >
-              Support Causes <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {donationCategoriesList.slice(0, 3).map((cat) => (
-              <div
-                key={cat.id}
-                className="bg-[#FAF7F0] text-[#22261F] p-6 rounded-2xl border-2 border-[#D4AF37]/60 shadow-md hover:shadow-xl flex flex-col justify-between hover:-translate-y-1 transition-all"
-              >
-                <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#0F4C36] gold-gradient-bg px-3 py-1 rounded-full mb-3 inline-block shadow-sm">
-                    Shariah Compliant
-                  </span>
-                  <h3 className="font-serif font-bold text-xl text-[#0F4C36] mb-2">{cat.title}</h3>
-                  <p className="text-xs text-[#22261F]/80 leading-relaxed">{cat.description}</p>
-                </div>
-                <div className="mt-6 pt-4 border-t border-[#D4AF37]/30">
-                  <Link
-                    to={`/donate?category=${cat.id}`}
-                    className="btn-islamic-green w-full py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center block shadow-sm hover:shadow-md"
-                  >
-                    Donate to {cat.title}
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 13. Stats Banner */}
-      <section className="py-16 bg-[#FAF7F0]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            <StatCounter value="50+ Years" label="Community Service" sublabel="Serving Pune since inception" />
-            <StatCounter value="5 Times" label="Daily Congregational Namaz" sublabel="With full Azaan & Jamaat" />
-            <StatCounter value="1,000s" label="Dignified Burials Handled" sublabel="Strictly per Sunnah principles" />
-            <StatCounter value="100%" label="Transparent & Dedicated" sublabel="Serving the Muslim Community" />
-          </div>
-        </div>
-      </section>
 
       {/* 14. Transparency Callout Banner */}
       <section className="py-12 bg-white">
