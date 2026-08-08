@@ -11,6 +11,7 @@ import { Transparency } from './pages/Transparency';
 import { Gallery } from './pages/Gallery';
 import { Contact } from './pages/Contact';
 import { Policies } from './pages/Policies';
+import { NeedyCases } from './pages/NeedyCases';
 import { NotFound } from './pages/NotFound';
 
 // Helper component to scroll to top on route change
@@ -36,6 +37,8 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/masjid" element={<Masjid />} />
             <Route path="/kabristan" element={<Kabristan />} />
+            <Route path="/welfare-cases" element={<NeedyCases />} />
+            <Route path="/needy-cases" element={<NeedyCases />} />
             <Route path="/donate" element={<Donate />} />
             <Route path="/transparency" element={<Transparency />} />
             <Route path="/gallery" element={<Gallery />} />

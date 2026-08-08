@@ -52,3 +52,19 @@ export interface BurialRuleCategory {
   icon: string;
   rules: string[];
 }
+
+export interface NeedyProfile {
+  id: string;
+  caseNumber: string;
+  title: string;
+  category: 'Medical Relief' | 'Ration & Food' | 'Orphan Education' | 'Widow Support' | 'Housing Emergency';
+  beneficiaryName: string;
+  location: string;
+  story: string;
+  targetAmount: number;
+  raisedAmount: number;
+  verifiedBy: string;
+  urgency: 'Critical' | 'High' | 'Moderate';
+  isZakatEligible: boolean;
+  imageUrl?: string;
+}

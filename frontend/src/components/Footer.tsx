@@ -45,6 +45,7 @@ export const Footer: React.FC = () => {
               <li><Link to="/about" className="hover:text-[#0F4C36] transition-colors">About The Trust</Link></li>
               <li><Link to="/masjid" className="hover:text-[#0F4C36] transition-colors">Masjid &amp; Prayer Schedule</Link></li>
               <li><Link to="/kabristan" className="hover:text-[#0F4C36] transition-colors">Kabristan &amp; Burial Guidelines</Link></li>
+              <li><Link to="/welfare-cases" className="hover:text-[#0F4C36] transition-colors font-bold text-[#0F4C36]">Verified Welfare Cases</Link></li>
               <li><Link to="/donate" className="hover:text-[#0F4C36] transition-colors flex items-center gap-1.5 font-bold text-[#0F4C36]"><Heart className="w-3.5 h-3.5 fill-[#D4AF37] text-[#D4AF37]" /> Support Masjid</Link></li>
               <li><Link to="/contact" className="hover:text-[#0F4C36] transition-colors">Contact Us</Link></li>
             </ul>
