@@ -6,7 +6,7 @@ Official web application for Zakariya Masjid & Kabristan Trust, Pune, India.
 - **Daily Namaz & Prayer Timings**: Live schedule & Hijri calendar details.
 - **Welfare Assistance Portal**: Direct reachout options for community members in need.
 - **Verified Needy Profiles**: Transparent, authenticated welfare cases.
-- **Islamic Design System**: Custom HSL color tokens, arch frames, and Rub el Hizb geometric tessellation.
+- **Islamic Design System**: Custom HSL color tokens, arch frames, and Rub el Hizb geometric tessellation. ssh
 
 ## Run Locally
 
