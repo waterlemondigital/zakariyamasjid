@@ -29,7 +29,6 @@ const mockNeedyProfiles: NeedyProfile[] = [
     verifiedBy: 'Maulana Shabbir & Trustee Committee',
     urgency: 'Critical',
     isZakatEligible: true,
-    imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop',
   },
   {
     id: '2',
@@ -44,7 +43,6 @@ const mockNeedyProfiles: NeedyProfile[] = [
     verifiedBy: 'Welfare Officer Janab Tanveer Seth',
     urgency: 'High',
     isZakatEligible: true,
-    imageUrl: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop',
   },
   {
     id: '3',
@@ -59,7 +57,6 @@ const mockNeedyProfiles: NeedyProfile[] = [
     verifiedBy: 'Madrasa Supervisor & Education Desk',
     urgency: 'Moderate',
     isZakatEligible: true,
-    imageUrl: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop',
   },
 ];
 
@@ -117,45 +114,35 @@ export const NeedyCases: React.FC = () => {
 
                 <div className="p-6 space-y-5 flex-grow">
                   {/* Card Header & Badges */}
-                  <div className="flex items-start justify-between gap-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 pb-3">
                     <span className="inline-flex items-center gap-1 bg-[#0F4C36]/10 text-[#0F4C36] border border-[#0F4C36]/30 text-[11px] font-bold px-3 py-1 rounded-full">
                       <Coins className="w-3.5 h-3.5 text-[#B8860B]" /> {profile.category}
                     </span>
 
-                    {profile.isZakatEligible && (
-                      <span className="inline-flex items-center gap-1 bg-[#D4AF37]/20 text-[#8C620B] border border-[#D4AF37]/60 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                        <CheckCircle2 className="w-3 h-3 text-[#B8860B]" /> Zakat Eligible
+                    <div className="flex items-center gap-2">
+                      {profile.isZakatEligible && (
+                        <span className="inline-flex items-center gap-1 bg-[#D4AF37]/20 text-[#8C620B] border border-[#D4AF37]/60 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                          <CheckCircle2 className="w-3 h-3 text-[#B8860B]" /> Zakat Eligible
+                        </span>
+                      )}
+                      <span className="bg-[#0F4C36] text-[#F3E5AB] font-mono px-2.5 py-0.5 rounded-md text-[10px] border border-[#D4AF37] font-bold">
+                        {profile.caseNumber}
                       </span>
-                    )}
+                    </div>
                   </div>
 
-                  {/* Profile Thumbnail Image */}
-                  {profile.imageUrl && (
-                    <div className="h-44 rounded-2xl overflow-hidden relative border border-[#D4AF37]/30 shadow-inner">
-                      <img
-                        src={profile.imageUrl}
-                        alt={profile.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                      <div className="absolute bottom-3 left-3 right-3 text-white text-xs font-semibold flex items-center justify-between">
-                        <span className="flex items-center gap-1 bg-black/60 px-2.5 py-1 rounded-lg backdrop-blur-xs">
-                          <MapPin className="w-3.5 h-3.5 text-[#D4AF37]" /> {profile.location}
-                        </span>
-                        <span className="bg-[#0F4C36] text-[#F3E5AB] font-mono px-2 py-0.5 rounded-md text-[10px] border border-[#D4AF37]">
-                          {profile.caseNumber}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Title & Beneficiary */}
-                  <div className="space-y-1.5">
+                  {/* Title & Beneficiary & Location */}
+                  <div className="space-y-2">
                     <h3 className="font-serif text-xl font-bold text-[#0F4C36] leading-snug group-hover:text-[#B8860B] transition-colors">
                       {profile.title}
                     </h3>
-                    <div className="flex items-center gap-1.5 text-xs text-[#22261F]/75 font-semibold">
-                      <User className="w-3.5 h-3.5 text-[#B8860B]" /> Beneficiary: {profile.beneficiaryName}
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#22261F]/75 font-semibold">
+                      <span className="flex items-center gap-1.5">
+                        <User className="w-3.5 h-3.5 text-[#B8860B]" /> {profile.beneficiaryName}
+                      </span>
+                      <span className="flex items-center gap-1 text-[#0F4C36]">
+                        <MapPin className="w-3.5 h-3.5 text-[#D4AF37]" /> {profile.location}
+                      </span>
                     </div>
                   </div>
 
