@@ -67,7 +67,7 @@ export const NeedyAssistanceSection: React.FC = () => {
         </div>
 
         {/* Quick Contact Reachout Options (WhatsApp & Direct Call Logos) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {/* WhatsApp Direct Option */}
           <div className="bg-white rounded-2xl p-6 border-2 border-[#25D366]/40 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-5 relative group">
             <div className="space-y-3">
@@ -127,31 +127,6 @@ export const NeedyAssistanceSection: React.FC = () => {
               <Phone className="w-4 h-4 text-[#D4AF37]" />
               Call +91 98901 85013
             </a>
-          </div>
-
-          {/* Office Visit Option */}
-          <div className="bg-white rounded-2xl p-6 border-2 border-[#D4AF37]/50 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-5 relative group md:col-span-2 lg:col-span-1">
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 flex items-center justify-center border border-[#D4AF37]/40">
-                  <MapPin className="w-6 h-6 text-[#B8860B]" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg text-[#0F4C36]">In-Person Office Visit</h3>
-                  <span className="text-xs text-[#B8860B] font-semibold">
-                    Post-Zuhr &amp; Asr Hours
-                  </span>
-                </div>
-              </div>
-              <p className="text-xs text-[#22261F]/75 leading-relaxed">
-                Visit the Trust Office at Zakariya Masjid, Mundhwa, Off Koregaon Park, Pune for confidential in-person application.
-              </p>
-            </div>
-            <div className="bg-[#FAF7F0] border border-[#D4AF37]/40 rounded-xl p-3 text-center">
-              <span className="text-[11px] font-bold text-[#0F4C36] block">
-                Office Hours: 1:30 PM - 6:00 PM Daily
-              </span>
-            </div>
           </div>
         </div>
 
