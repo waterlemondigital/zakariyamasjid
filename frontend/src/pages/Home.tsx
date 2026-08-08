@@ -11,7 +11,6 @@ import { HomePrayerWidget } from '../components/HomePrayerWidget';
 import { JanazahQuickBar } from '../components/JanazahQuickBar';
 import { DigitalTasbeeh } from '../components/DigitalTasbeeh';
 import { MadrasaHighlight } from '../components/MadrasaHighlight';
-import { MosqueGalleryTeaser } from '../components/MosqueGalleryTeaser';
 import { NeedyAssistanceSection } from '../components/NeedyAssistanceSection';
 import { Building, Heart, Crosshair, BookOpen, Radio, Sparkles, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
@@ -91,15 +90,29 @@ export const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            {/* Arch Photo Column */}
-            <div className="lg:col-span-5">
-              <ArchFrame className="max-w-md mx-auto">
-                <img
-                  src="https://images.unsplash.com/photo-1590076175571-4b5459efb08c?q=80&w=1000&auto=format&fit=crop"
-                  alt="Zakariya Masjid Mosque Courtyard & Architecture"
-                  className="w-full h-[420px] object-cover hover:scale-105 transition-transform duration-700"
-                />
-              </ArchFrame>
+            {/* 2 Small Picture Placeholders Section (Masjid & Kabristan) */}
+            <div className="lg:col-span-5 space-y-4">
+              {/* Masjid Photo Placeholder */}
+              <div className="bg-white p-3.5 rounded-2xl border-2 border-[#D4AF37] shadow-md hover:shadow-lg transition-shadow">
+                <div className="w-full h-44 rounded-xl border-2 border-dashed border-[#D4AF37]/60 bg-[#FAF7F0] flex flex-col items-center justify-center p-4 text-center relative overflow-hidden group">
+                  <Building className="w-9 h-9 text-[#0F4C36] mb-1.5 opacity-80 group-hover:scale-110 transition-transform" />
+                  <span className="font-serif font-bold text-base text-[#0F4C36]">Zakariya Masjid Photo</span>
+                  <span className="text-[11px] text-[#22261F]/60 font-mono mt-0.5">[ Masjid Photo Placeholder ]</span>
+                  {/* Photo img tag ready for src insertion */}
+                  <img src="" alt="Zakariya Masjid" className="hidden" />
+                </div>
+              </div>
+
+              {/* Kabristan Photo Placeholder */}
+              <div className="bg-white p-3.5 rounded-2xl border-2 border-[#D4AF37] shadow-md hover:shadow-lg transition-shadow">
+                <div className="w-full h-44 rounded-xl border-2 border-dashed border-[#D4AF37]/60 bg-[#FAF7F0] flex flex-col items-center justify-center p-4 text-center relative overflow-hidden group">
+                  <Crosshair className="w-9 h-9 text-[#B8860B] mb-1.5 opacity-80 group-hover:scale-110 transition-transform" />
+                  <span className="font-serif font-bold text-base text-[#0F4C36]">Zakariya Kabristan Photo</span>
+                  <span className="text-[11px] text-[#22261F]/60 font-mono mt-0.5">[ Kabristan Photo Placeholder ]</span>
+                  {/* Photo img tag ready for src insertion */}
+                  <img src="" alt="Zakariya Kabristan" className="hidden" />
+                </div>
+              </div>
             </div>
 
             {/* Content Column */}
@@ -299,13 +312,6 @@ export const Home: React.FC = () => {
       <section className="py-16 bg-[#FAF7F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <DigitalTasbeeh />
-        </div>
-      </section>
-
-      {/* 11. Visual Tour / Mosque Gallery Teaser */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <MosqueGalleryTeaser />
         </div>
       </section>
 
