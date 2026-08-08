@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { NeedyProfile } from '../types';
 import { SectionDivider } from '../components/SectionDivider';
 import { TrustBadge } from '../components/TrustBadge';
@@ -10,15 +9,11 @@ import {
   Sparkles, 
   CheckCircle2, 
   AlertCircle, 
-  Share2, 
   MapPin, 
   User, 
   FileCheck, 
-  ArrowRight,
   Filter,
-  Coins,
-  Copy,
-  Check
+  Coins
 } from 'lucide-react';
 
 const mockNeedyProfiles: NeedyProfile[] = [
@@ -71,18 +66,11 @@ const mockNeedyProfiles: NeedyProfile[] = [
 
 export const NeedyCases: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const filteredProfiles = mockNeedyProfiles.filter((profile) => {
     if (selectedCategory === 'All') return true;
     return profile.category === selectedCategory;
   });
-
-  const handleCopyCaseId = (caseNumber: string) => {
-    navigator.clipboard.writeText(caseNumber);
-    setCopiedId(caseNumber);
-    setTimeout(() => setCopiedId(null), 2000);
-  };
 
   return (
     <div className="py-12 md:py-20 bg-[#FAF7F0] min-h-screen">
@@ -154,11 +142,6 @@ export const NeedyCases: React.FC = () => {
         {/* Needy Profiles Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {filteredProfiles.map((profile) => {
-            const percentage = Math.min(
-              100,
-              Math.round((profile.raisedAmount / profile.targetAmount) * 100)
-            );
-
             return (
               <div
                 key={profile.id}
@@ -217,59 +200,10 @@ export const NeedyCases: React.FC = () => {
                   </p>
 
                   {/* Verification Note */}
-                  <div className="flex items-center gap-1.5 text-[11px] text-[#0F4C36] font-medium pt-1">
+                  <div className="flex items-center gap-1.5 text-[11px] text-[#0F4C36] font-medium pt-1 border-t border-gray-100">
                     <ShieldCheck className="w-4 h-4 text-[#D4AF37] flex-shrink-0" />
                     <span>Verified by: <strong className="text-[#0F4C36]">{profile.verifiedBy}</strong></span>
                   </div>
-
-                  {/* Progress Bar & Amount */}
-                  <div className="space-y-2 pt-2 border-t border-gray-100">
-                    <div className="flex items-center justify-between text-xs font-bold">
-                      <span className="text-[#0F4C36]">
-                        Raised: ₹{profile.raisedAmount.toLocaleString('en-IN')}
-                      </span>
-                      <span className="text-[#22261F]/60">
-                        Target: ₹{profile.targetAmount.toLocaleString('en-IN')}
-                      </span>
-                    </div>
-
-                    {/* Outer Bar */}
-                    <div className="w-full bg-[#FAF7F0] rounded-full h-3.5 p-0.5 border border-[#D4AF37]/50 shadow-inner overflow-hidden">
-                      <div
-                        className="gold-gradient-bg h-full rounded-full transition-all duration-1000 shadow-sm"
-                        style={{ width: `${percentage}%` }}
-                      ></div>
-                    </div>
-
-                    <div className="flex items-center justify-between text-[11px] font-semibold text-[#22261F]/70 pt-0.5">
-                      <span className="text-[#B8860B] font-bold">{percentage}% Funded</span>
-                      <span>Remaining: ₹{(profile.targetAmount - profile.raisedAmount).toLocaleString('en-IN')}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Footer Buttons */}
-                <div className="p-4 bg-[#FAF7F0] border-t border-[#D4AF37]/30 flex items-center justify-between gap-2">
-                  <button
-                    type="button"
-                    onClick={() => handleCopyCaseId(profile.caseNumber)}
-                    className="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-white border border-[#D4AF37]/50 text-[#0F4C36] font-bold text-xs hover:bg-[#0F4C36]/5 transition-colors"
-                    title="Copy Case Number for reference"
-                  >
-                    {copiedId === profile.caseNumber ? (
-                      <Check className="w-3.5 h-3.5 text-green-600" />
-                    ) : (
-                      <Copy className="w-3.5 h-3.5 text-[#B8860B]" />
-                    )}
-                    {copiedId === profile.caseNumber ? 'Copied' : 'Case ID'}
-                  </button>
-
-                  <Link
-                    to="/donate"
-                    className="btn-islamic-gold flex-1 py-2.5 px-4 rounded-xl text-xs font-bold text-center inline-flex items-center justify-center gap-1.5 shadow-md"
-                  >
-                    Support This Case <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
                 </div>
               </div>
             );
