@@ -52,7 +52,7 @@ export const Navbar: React.FC = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 bg-[#25D366] text-white px-2.5 py-0.5 rounded-full font-bold hover:bg-[#1EBE5A] transition-colors"
             >
-              Need Assistance? WhatsApp Us
+              Need any Help Contact Us
             </a>
           </div>
           <div className="flex items-center gap-6">

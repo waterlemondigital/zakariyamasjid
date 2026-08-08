@@ -63,7 +63,7 @@ export const NeedyAssistanceSection: React.FC = () => {
             <HeartHandshake className="w-4 h-4 text-[#D4AF37]" /> Community Relief &amp; Welfare Portal
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0F4C36]">
-            Reach Out for Assistance &amp; Relief
+            Reach out for any help
           </h2>
           <p className="text-sm md:text-base text-[#22261F]/80 leading-relaxed max-w-2xl mx-auto">
             Zakariya Masjid &amp; Kabristan Trust is dedicated to providing confidential support, food rations, emergency medical relief, and financial aid to individuals and families in need.
