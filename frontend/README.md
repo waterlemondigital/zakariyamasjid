@@ -1,20 +1,19 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Zakariya Masjid & Kabristan Trust - Web Application
 
-# Run and deploy your AI Studio app
+Official web application for Zakariya Masjid & Kabristan Trust, Pune, India.
 
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/8eb2eb6b-b86a-4860-a147-ae31a71913a0
+## Key Features
+- **Daily Namaz & Prayer Timings**: Live schedule & Hijri calendar details.
+- **Welfare Assistance Portal**: Direct reachout options for community members in need.
+- **Verified Needy Profiles**: Transparent, authenticated welfare cases.
+- **Islamic Design System**: Custom HSL color tokens, arch frames, and Rub el Hizb geometric tessellation.
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
-
-
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
+2. Run the development server:
    `npm run dev`
+3. Build for production:
+   `npm run build`
+
