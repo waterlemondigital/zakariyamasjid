@@ -12,7 +12,7 @@ import { JanazahQuickBar } from '../components/JanazahQuickBar';
 import { DigitalTasbeeh } from '../components/DigitalTasbeeh';
 import { MadrasaHighlight } from '../components/MadrasaHighlight';
 import { NeedyAssistanceSection } from '../components/NeedyAssistanceSection';
-import { Building, Heart, Crosshair, BookOpen, Radio, Sparkles, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Building, Heart, Crosshair, BookOpen, Sparkles, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 export const Home: React.FC = () => {
   return (
@@ -271,12 +271,6 @@ export const Home: React.FC = () => {
                 title: 'Community Welfare & Zakat',
                 desc: 'Transparent distribution of Zakat and Sadaqah funds to widows, orphans, medical emergencies, and poor families.',
                 link: '/donate',
-              },
-              {
-                icon: <Radio className="w-7 h-7 text-[#D4AF37]" />,
-                title: 'Live Khutbah & Streaming',
-                desc: 'Live streaming of Friday Khutbahs and special Ramadan lectures for sisters, elders, and community members at home.',
-                link: '/masjid',
               },
               {
                 icon: <ShieldCheck className="w-7 h-7 text-[#D4AF37]" />,
