@@ -189,10 +189,9 @@ export const NeedyCases: React.FC = () => {
         <NeedyAssistanceSection />
 
         {/* Trust Badges */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
           <TrustBadge type="registered" title="Zakariya Masjid Trust" subtitle="Mundhwa, Off Koregaon Park, Pune" />
           <TrustBadge type="audited" title="Audited &amp; Accountable" subtitle="Financial Integrity &amp; Transparency" />
-          <TrustBadge type="nonprofit" title="Direct Beneficiary Aid" subtitle="100% Funds Reaching Verified Cases" />
           <TrustBadge type="shariah" title="Strict Zakat Isolation" subtitle="Zakat kept completely separate" />
         </div>
       </div>
