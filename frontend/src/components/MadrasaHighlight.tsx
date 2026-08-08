@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Users, Clock, CheckCircle2, Award, Sparkles, GraduationCap } from 'lucide-react';
+import { BookOpen, GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const MadrasaHighlight: React.FC = () => {
@@ -16,10 +16,6 @@ export const MadrasaHighlight: React.FC = () => {
                 alt="Children studying Holy Quran at Madrasa Zakariya"
                 className="w-full h-[360px] object-cover hover:scale-105 transition-transform duration-700"
               />
-            </div>
-            <div className="absolute -bottom-4 -right-4 bg-[#0F4C36] text-[#F3E5AB] p-4 rounded-2xl border-2 border-[#D4AF37] shadow-lg text-center hidden sm:block">
-              <span className="block font-serif font-bold text-2xl text-white">150+</span>
-              <span className="text-[10px] uppercase font-bold tracking-wider">Students Enrolled</span>
             </div>
           </div>
         </div>
@@ -38,28 +34,6 @@ export const MadrasaHighlight: React.FC = () => {
             Zakariya Madrasa provides structured Quranic education, correct Tajweed pronunciation, Hifz-ul-Qur'an memorization, and foundational Islamic etiquette (Adab &amp; Akhlaq) for boys and girls under qualified Aalim and Qari teachers.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-            <div className="bg-white p-4 rounded-2xl border border-[#D4AF37]/40 shadow-sm flex items-start gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#0F4C36] text-[#D4AF37] flex items-center justify-center flex-shrink-0 font-bold">
-                <BookOpen className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="font-serif font-bold text-[#0F4C36] text-sm">Nazra &amp; Tajweed Batch</h4>
-                <p className="text-xs text-[#22261F]/70">Daily 05:00 PM – 07:00 PM • Ages 5 to 15</p>
-              </div>
-            </div>
-
-            <div className="bg-white p-4 rounded-2xl border border-[#D4AF37]/40 shadow-sm flex items-start gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#0F4C36] text-[#D4AF37] flex items-center justify-center flex-shrink-0 font-bold">
-                <Award className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="font-serif font-bold text-[#0F4C36] text-sm">Hifz-ul-Qur'an Program</h4>
-                <p className="text-xs text-[#22261F]/70">Full-time &amp; Part-time memorization</p>
-              </div>
-            </div>
-          </div>
-
           <div className="pt-2 flex flex-wrap items-center gap-4">
             <Link
               to="/masjid"
@@ -67,9 +41,6 @@ export const MadrasaHighlight: React.FC = () => {
             >
               Enroll Your Child <BookOpen className="w-4 h-4 text-[#D4AF37]" />
             </Link>
-            <span className="text-xs text-[#22261F]/70 font-semibold">
-              Separate arrangements for Sisters &amp; Female Teachers
-            </span>
           </div>
         </div>
 
