@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NeedyProfile } from '../types';
 import { SectionDivider } from '../components/SectionDivider';
 import { TrustBadge } from '../components/TrustBadge';
@@ -12,7 +12,6 @@ import {
   MapPin, 
   User, 
   FileCheck, 
-  Filter,
   Coins
 } from 'lucide-react';
 
@@ -65,12 +64,6 @@ const mockNeedyProfiles: NeedyProfile[] = [
 ];
 
 export const NeedyCases: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-
-  const filteredProfiles = mockNeedyProfiles.filter((profile) => {
-    if (selectedCategory === 'All') return true;
-    return profile.category === selectedCategory;
-  });
 
   return (
     <div className="py-12 md:py-20 bg-[#FAF7F0] min-h-screen">
@@ -111,37 +104,9 @@ export const NeedyCases: React.FC = () => {
           </div>
         </div>
 
-        {/* Filter Category Bar */}
-        <div className="bg-white rounded-2xl p-4 border border-[#D4AF37]/50 shadow-md flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-xs font-bold text-[#0F4C36] uppercase tracking-wider">
-            <Filter className="w-4 h-4 text-[#B8860B]" /> Filter Cases:
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2">
-            {['All', 'Medical Relief', 'Widow Support', 'Orphan Education'].map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                  selectedCategory === cat
-                    ? 'bg-[#0F4C36] text-[#F3E5AB] border border-[#D4AF37] shadow-sm'
-                    : 'bg-[#FAF7F0] text-[#22261F]/80 hover:bg-[#0F4C36]/10 border border-transparent'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          <div className="text-xs text-[#22261F]/60 font-medium">
-            Showing <span className="font-bold text-[#0F4C36]">{filteredProfiles.length}</span> Verified Profiles
-          </div>
-        </div>
-
         {/* Needy Profiles Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {filteredProfiles.map((profile) => {
+          {mockNeedyProfiles.map((profile) => {
             return (
               <div
                 key={profile.id}
