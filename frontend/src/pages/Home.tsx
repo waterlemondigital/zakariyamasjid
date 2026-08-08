@@ -14,6 +14,7 @@ import { JanazahQuickBar } from '../components/JanazahQuickBar';
 import { DigitalTasbeeh } from '../components/DigitalTasbeeh';
 import { MadrasaHighlight } from '../components/MadrasaHighlight';
 import { MosqueGalleryTeaser } from '../components/MosqueGalleryTeaser';
+import { NeedyAssistanceSection } from '../components/NeedyAssistanceSection';
 import { Building, Heart, Crosshair, BookOpen, Radio, Sparkles, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 export const Home: React.FC = () => {
@@ -398,7 +399,12 @@ export const Home: React.FC = () => {
 
       <SectionDivider />
 
-      {/* 15. Contact / Location Teaser */}
+      {/* 15. Relief & Assistance for People in Need Section */}
+      <NeedyAssistanceSection />
+
+      <SectionDivider />
+
+      {/* 16. Contact / Location Teaser */}
       <section className="py-16 md:py-24 bg-[#FAF7F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -414,7 +420,7 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 16. CTA Section */}
+      {/* 17. CTA Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <CTASection />
       </div>

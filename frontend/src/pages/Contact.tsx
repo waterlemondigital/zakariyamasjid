@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MapEmbed } from '../components/MapEmbed';
 import { SectionDivider } from '../components/SectionDivider';
+import { NeedyAssistanceSection } from '../components/NeedyAssistanceSection';
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle, ShieldCheck } from 'lucide-react';
 
 export const Contact: React.FC = () => {
@@ -196,6 +197,11 @@ export const Contact: React.FC = () => {
             )}
           </div>
         </div>
+
+        <SectionDivider />
+
+        {/* Welfare Assistance Portal Section */}
+        <NeedyAssistanceSection />
 
         <SectionDivider />
 

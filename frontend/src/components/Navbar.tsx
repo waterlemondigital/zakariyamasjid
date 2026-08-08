@@ -46,6 +46,14 @@ export const Navbar: React.FC = () => {
             <span className="flex items-center gap-1.5 text-[#F3E5AB]">
               <Clock className="w-3.5 h-3.5 text-[#D4AF37]" /> Zuhr Jamaat: 1:20 PM
             </span>
+            <a
+              href="https://wa.me/919890185013?text=Assalamu%20Alaikum,%20I%20need%20assistance"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 bg-[#25D366] text-white px-2.5 py-0.5 rounded-full font-bold hover:bg-[#1EBE5A] transition-colors"
+            >
+              Need Assistance? WhatsApp Us
+            </a>
           </div>
           <div className="flex items-center gap-6">
             <a href="tel:+919890185013" className="flex items-center gap-1.5 hover:text-[#F3E5AB] transition-colors font-medium">
