@@ -5,11 +5,35 @@ import { SectionDivider } from '../components/SectionDivider';
 import { CTASection } from '../components/CTASection';
 import { Camera, X, Image as ImageIcon } from 'lucide-react';
 
+import namazImg from '../../assets/images/namaz.jpeg';
+import wadukhanaImg from '../../assets/images/wadukhana.jpeg';
+
 export const Gallery: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'all' | 'masjid' | 'kabristan' | 'events' | 'ramadan'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'masjid' | 'ramadan'>('all');
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
 
   const galleryItems: GalleryItem[] = [
+    {
+      id: 'namaz-masjid',
+      title: 'Daily Namaz Congregation',
+      category: 'masjid',
+      imageUrl: namazImg,
+      caption: 'Worshippers gathered for daily congregational prayer at Zakariya Masjid.',
+    },
+    {
+      id: 'wadukhana-masjid',
+      title: 'Wadu Khana & Ablution Facilities',
+      category: 'masjid',
+      imageUrl: wadukhanaImg,
+      caption: 'Clean, well-maintained Wudu facility with running water for worshippers.',
+    },
+    {
+      id: 'namaz-ramadan',
+      title: 'Ramadan Congregational Prayers',
+      category: 'ramadan',
+      imageUrl: namazImg,
+      caption: 'Special congregational prayers and night worship during the holy month of Ramadan.',
+    },
     {
       id: '1',
       title: 'Zakariya Masjid Main Prayer Hall',
@@ -26,10 +50,10 @@ export const Gallery: React.FC = () => {
     },
     {
       id: '3',
-      title: 'Kabristan Pathway & Greenery',
-      category: 'kabristan',
-      imageUrl: 'https://images.unsplash.com/photo-1512632578888-169bbbc64f33?q=80&w=1000&auto=format&fit=crop',
-      caption: 'Clean, illuminated pathways and serene trees within the Kabristan grounds.',
+      title: 'Night Illumination of Minaret',
+      category: 'masjid',
+      imageUrl: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?q=80&w=1000&auto=format&fit=crop',
+      caption: 'Illuminated minaret during Isha prayers at Zakariya Masjid.',
     },
     {
       id: '4',
@@ -40,36 +64,36 @@ export const Gallery: React.FC = () => {
     },
     {
       id: '5',
-      title: 'Children Qur\'an Tajweed Madrasa',
-      category: 'events',
+      title: 'Taraweeh Night Prayers',
+      category: 'ramadan',
       imageUrl: 'https://images.unsplash.com/photo-1585036156171-384164a8c675?q=80&w=1000&auto=format&fit=crop',
-      caption: 'Daily evening Qur\'an and Tajweed classes for neighborhood youth.',
+      caption: 'Nightly Taraweeh congregation and Qur\'an recitation during Ramadan.',
     },
     {
       id: '6',
-      title: 'Night Illumination of Minaret',
-      category: 'masjid',
-      imageUrl: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?q=80&w=1000&auto=format&fit=crop',
-      caption: 'Illuminated minaret during Isha prayers at Zakariya Masjid.',
-    },
-    {
-      id: '7',
       title: 'Jumu\'ah Congregation Gathering',
       category: 'masjid',
       imageUrl: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1000&auto=format&fit=crop',
       caption: 'Full congregation gathered for Friday Jumu\'ah prayer and khutbah.',
     },
     {
-      id: '8',
+      id: '7',
       title: 'Eid-ul-Fitr Morning Prayer',
       category: 'ramadan',
       imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1000&auto=format&fit=crop',
       caption: 'Special Eid morning prayer and community greetings.',
     },
+    {
+      id: '8',
+      title: 'Laylatul Qadr Night Worship',
+      category: 'ramadan',
+      imageUrl: 'https://images.unsplash.com/photo-1512632578888-169bbbc64f33?q=80&w=1000&auto=format&fit=crop',
+      caption: 'Atmospheric night worship and supplication during the last ten nights of Ramadan.',
+    },
   ];
 
   const filteredItems = activeTab === 'all'
-    ? galleryItems
+    ? galleryItems.filter((item, index, self) => index === self.findIndex(t => t.imageUrl === item.imageUrl))
     : galleryItems.filter(item => item.category === activeTab);
 
   return (
@@ -85,7 +109,7 @@ export const Gallery: React.FC = () => {
             Photo &amp; Media Gallery
           </h1>
           <p className="text-base text-[#22261F]/80">
-            A visual glance into Zakariya Masjid, Kabristan grounds, Ramadan gatherings, and community activities.
+            A visual glance into Zakariya Masjid, Ramadan gatherings, and Eid prayers.
           </p>
           <div className="w-20 h-1 bg-[#C9A227] mx-auto rounded-full mt-3"></div>
         </div>
@@ -94,9 +118,7 @@ export const Gallery: React.FC = () => {
         <div className="flex flex-wrap items-center justify-center gap-2 border-b border-[#C9A227]/30 pb-4">
           {[
             { id: 'all', label: 'All Photos' },
-            { id: 'masjid', label: 'Masjid Architecture' },
-            { id: 'kabristan', label: 'Kabristan Grounds' },
-            { id: 'events', label: 'Community & Madrasa' },
+            { id: 'masjid', label: 'Masjid' },
             { id: 'ramadan', label: 'Ramadan &amp; Eid' },
           ].map((tab) => (
             <button

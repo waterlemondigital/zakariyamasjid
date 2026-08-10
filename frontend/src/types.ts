@@ -42,7 +42,7 @@ export interface AuditDoc {
 export interface GalleryItem {
   id: string;
   title: string;
-  category: 'masjid' | 'kabristan' | 'events' | 'ramadan';
+  category: 'masjid' | 'ramadan';
   imageUrl: string;
   caption?: string;
 }
