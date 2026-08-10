@@ -22,9 +22,9 @@ export const Logo: React.FC<LogoProps> = ({ className = 'h-10 sm:h-12 md:h-14', 
         className="h-full w-auto object-contain flex-shrink-0 drop-shadow-md transition-transform duration-300 group-hover:scale-105"
       />
 
-      {/* Side Typography Text */}
+      {/* Side Typography Text — hidden on lg to avoid overlap with nav links, shown on xl+ and below lg */}
       {showSubtext && (
-        <div className="flex flex-col justify-center flex-shrink-0">
+        <div className="flex flex-col justify-center flex-shrink-0 lg:hidden xl:flex">
           <span className={`font-serif font-extrabold tracking-wider leading-none text-base sm:text-lg md:text-xl ${textColor}`}>
             ZAKARIYA
           </span>
