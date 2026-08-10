@@ -75,21 +75,21 @@ export const Navbar: React.FC = () => {
             : 'bg-white border-[#D4AF37]/40 shadow-sm py-4 text-[#22261F]'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-2 md:gap-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center group">
-            <Logo className="h-12 md:h-14" variant="full" showSubtext={true} />
+          <Link to="/" className="flex items-center group flex-shrink">
+            <Logo className="h-10 sm:h-12 md:h-14" variant="full" showSubtext={true} />
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 flex-shrink">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
               return (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`px-3 py-2 rounded-lg text-xs xl:text-sm font-bold uppercase tracking-wider transition-all relative ${
+                  className={`px-2 xl:px-2.5 py-1.5 rounded-lg text-[11px] xl:text-xs 2xl:text-sm font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
                     isActive
                       ? 'text-[#0F4C36] bg-[#0F4C36]/10 font-extrabold border-b-2 border-[#D4AF37] shadow-sm'
                       : 'text-[#22261F]/80 hover:text-[#0F4C36] hover:bg-[#0F4C36]/5'
@@ -102,10 +102,10 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Right Action: Donate Button */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-3 flex-shrink-0">
             <Link
               to="/donate"
-              className="btn-islamic-gold px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-md hover:shadow-lg transition-all"
+              className="btn-islamic-gold px-4 xl:px-5 py-2 xl:py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-md hover:shadow-lg transition-all whitespace-nowrap"
             >
               <Heart className="w-4 h-4 fill-current" /> Donate Now
             </Link>
