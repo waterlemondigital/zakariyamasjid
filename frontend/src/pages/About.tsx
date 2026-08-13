@@ -1,10 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SectionDivider } from '../components/SectionDivider';
-import { ArchFrame } from '../components/ArchFrame';
-import { TrustBadge } from '../components/TrustBadge';
 import { CTASection } from '../components/CTASection';
-import { Building, Crosshair, Heart, ShieldCheck, ArrowRight, BookOpen, CheckCircle2 } from 'lucide-react';
+import { Building, Crosshair, Heart, ShieldCheck, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export const About: React.FC = () => {
   return (
@@ -95,55 +93,28 @@ export const About: React.FC = () => {
 
         <SectionDivider />
 
-        {/* Detailed Vision & Mission */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* 2 Small Picture Placeholders Section (Masjid & Kabristan) */}
-          <div className="lg:col-span-5 space-y-4">
-            {/* Masjid Photo Placeholder */}
-            <div className="bg-white p-3.5 rounded-2xl border-2 border-[#D4AF37] shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-full h-40 rounded-xl border-2 border-dashed border-[#D4AF37]/60 bg-[#FAF7F0] flex flex-col items-center justify-center p-4 text-center relative overflow-hidden group">
-                <Building className="w-8 h-8 text-[#0F4C36] mb-1 opacity-80 group-hover:scale-110 transition-transform" />
-                <span className="font-serif font-bold text-sm text-[#0F4C36]">Zakariya Masjid Photo</span>
-                <span className="text-[11px] text-[#22261F]/60 font-mono mt-0.5">[ Masjid Photo Placeholder ]</span>
-                {/* Photo img tag ready for src insertion */}
-                <img src="" alt="Zakariya Masjid" className="hidden" />
-              </div>
-            </div>
-
-            {/* Kabristan Photo Placeholder */}
-            <div className="bg-white p-3.5 rounded-2xl border-2 border-[#D4AF37] shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-full h-40 rounded-xl border-2 border-dashed border-[#D4AF37]/60 bg-[#FAF7F0] flex flex-col items-center justify-center p-4 text-center relative overflow-hidden group">
-                <Crosshair className="w-8 h-8 text-[#B8860B] mb-1 opacity-80 group-hover:scale-110 transition-transform" />
-                <span className="font-serif font-bold text-sm text-[#0F4C36]">Zakariya Kabristan Photo</span>
-                <span className="text-[11px] text-[#22261F]/60 font-mono mt-0.5">[ Kabristan Photo Placeholder ]</span>
-                {/* Photo img tag ready for src insertion */}
-                <img src="" alt="Zakariya Kabristan" className="hidden" />
-              </div>
-            </div>
+        {/* Governance & Transparency Card */}
+        <div className="bg-white rounded-3xl border-2 border-[#D4AF37]/50 p-8 md:p-12 shadow-lg space-y-6">
+          <div className="space-y-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#B8860B]">
+              Institutional Governance
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#0F4C36]">
+              Our Commitment to Transparency
+            </h2>
           </div>
 
-          <div className="lg:col-span-7 space-y-6">
-            <div className="space-y-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#B8860B]">
-                Institutional Governance
-              </span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#0F4C36]">
-                Our Commitment to Transparency
-              </h2>
-            </div>
+          <p className="text-[#22261F] leading-relaxed text-base md:text-lg">
+            Zakariya Masjid &amp; Kabristan operates with dedication to Islamic principles and community service. We ensure that every rupee of Sadaqah, Zakat, and general contribution is deployed strictly for facility upkeep, burial ground preservation, and community welfare.
+          </p>
 
-            <p className="text-[#22261F] leading-relaxed text-base">
-              Zakariya Masjid &amp; Kabristan operates with dedication to Islamic principles and community service. We ensure that every rupee of Sadaqah, Zakat, and general contribution is deployed strictly for facility upkeep, burial ground preservation, and community welfare.
-            </p>
-
-            <div className="pt-2">
-              <Link
-                to="/transparency"
-                className="btn-islamic-green px-6 py-3.5 rounded-xl font-bold text-sm flex items-center gap-2 inline-flex"
-              >
-                Governance &amp; Information <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
-              </Link>
-            </div>
+          <div className="pt-2">
+            <Link
+              to="/transparency"
+              className="btn-islamic-green px-6 py-3.5 rounded-xl font-bold text-sm flex items-center gap-2 inline-flex"
+            >
+              Governance &amp; Information <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
+            </Link>
           </div>
         </div>
 

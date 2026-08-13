@@ -88,81 +88,52 @@ export const Home: React.FC = () => {
       {/* 6. About the Trust Teaser Section */}
       <section id="home-about" className="py-16 md:py-24 bg-[#FAF7F0] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* 2 Small Picture Placeholders Section (Masjid & Kabristan) */}
-            <div className="lg:col-span-5 space-y-4">
-              {/* Masjid Photo Placeholder */}
-              <div className="bg-white p-3.5 rounded-2xl border-2 border-[#D4AF37] shadow-md hover:shadow-lg transition-shadow">
-                <div className="w-full h-44 rounded-xl border-2 border-dashed border-[#D4AF37]/60 bg-[#FAF7F0] flex flex-col items-center justify-center p-4 text-center relative overflow-hidden group">
-                  <Building className="w-9 h-9 text-[#0F4C36] mb-1.5 opacity-80 group-hover:scale-110 transition-transform" />
-                  <span className="font-serif font-bold text-base text-[#0F4C36]">Zakariya Masjid Photo</span>
-                  <span className="text-[11px] text-[#22261F]/60 font-mono mt-0.5">[ Masjid Photo Placeholder ]</span>
-                  {/* Photo img tag ready for src insertion */}
-                  <img src="" alt="Zakariya Masjid" className="hidden" />
-                </div>
-              </div>
+          <div className="max-w-4xl mx-auto space-y-6">
+            <div className="inline-flex items-center gap-2 bg-[#0F4C36]/10 text-[#0F4C36] font-bold text-xs uppercase tracking-widest px-3.5 py-1 rounded-full border border-[#D4AF37]/30">
+              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" /> Dedicated To Service &amp; Worship
+            </div>
 
-              {/* Kabristan Photo Placeholder */}
-              <div className="bg-white p-3.5 rounded-2xl border-2 border-[#D4AF37] shadow-md hover:shadow-lg transition-shadow">
-                <div className="w-full h-44 rounded-xl border-2 border-dashed border-[#D4AF37]/60 bg-[#FAF7F0] flex flex-col items-center justify-center p-4 text-center relative overflow-hidden group">
-                  <Crosshair className="w-9 h-9 text-[#B8860B] mb-1.5 opacity-80 group-hover:scale-110 transition-transform" />
-                  <span className="font-serif font-bold text-base text-[#0F4C36]">Zakariya Kabristan Photo</span>
-                  <span className="text-[11px] text-[#22261F]/60 font-mono mt-0.5">[ Kabristan Photo Placeholder ]</span>
-                  {/* Photo img tag ready for src insertion */}
-                  <img src="" alt="Zakariya Kabristan" className="hidden" />
-                </div>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F4C36] leading-tight">
+              About Zakariya Masjid &amp; Kabristan
+            </h2>
+
+            <p className="text-base md:text-lg text-[#22261F] leading-relaxed">
+              Zakariya Masjid &amp; Kabristan in Mundhwa, Pune, is dedicated to serving the Muslim community through worship, education, social welfare, and dignified burial services.
+            </p>
+
+            <p className="text-sm md:text-base text-[#22261F]/80 leading-relaxed">
+              Established with the sole intention of seeking the pleasure of Allah (SWT), the Trust strives to uphold Islamic values while meeting the spiritual, educational, and social needs of the community in Koregaon Park, Ghorpadi, and broader Pune.
+            </p>
+
+            {/* Highlights */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <div className="flex items-center gap-2 text-sm font-semibold text-[#0F4C36]">
+                <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" /> Five Daily Prayers &amp; Jumu'ah
+              </div>
+              <div className="flex items-center gap-2 text-sm font-semibold text-[#0F4C36]">
+                <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" /> Dignified Islamic Burial Grounds
+              </div>
+              <div className="flex items-center gap-2 text-sm font-semibold text-[#0F4C36]">
+                <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" /> Children's Qur'an &amp; Tajweed Classes
+              </div>
+              <div className="flex items-center gap-2 text-sm font-semibold text-[#0F4C36]">
+                <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" /> Transparent Zakat &amp; Sadaqah
               </div>
             </div>
 
-            {/* Content Column */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 bg-[#0F4C36]/10 text-[#0F4C36] font-bold text-xs uppercase tracking-widest px-3.5 py-1 rounded-full border border-[#D4AF37]/30">
-                <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" /> Dedicated To Service &amp; Worship
-              </div>
-
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F4C36] leading-tight">
-                About Zakariya Masjid &amp; Kabristan
-              </h2>
-
-              <p className="text-base md:text-lg text-[#22261F] leading-relaxed">
-                Zakariya Masjid &amp; Kabristan in Mundhwa, Pune, is dedicated to serving the Muslim community through worship, education, social welfare, and dignified burial services.
-              </p>
-
-              <p className="text-sm md:text-base text-[#22261F]/80 leading-relaxed">
-                Established with the sole intention of seeking the pleasure of Allah (SWT), the Trust strives to uphold Islamic values while meeting the spiritual, educational, and social needs of the community in Koregaon Park, Ghorpadi, and broader Pune.
-              </p>
-
-              {/* Highlights */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                <div className="flex items-center gap-2 text-sm font-semibold text-[#0F4C36]">
-                  <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" /> Five Daily Prayers &amp; Jumu'ah
-                </div>
-                <div className="flex items-center gap-2 text-sm font-semibold text-[#0F4C36]">
-                  <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" /> Dignified Islamic Burial Grounds
-                </div>
-                <div className="flex items-center gap-2 text-sm font-semibold text-[#0F4C36]">
-                  <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" /> Children's Qur'an &amp; Tajweed Classes
-                </div>
-                <div className="flex items-center gap-2 text-sm font-semibold text-[#0F4C36]">
-                  <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" /> Transparent Zakat &amp; Sadaqah
-                </div>
-              </div>
-
-              <div className="pt-4 flex flex-wrap items-center gap-4">
-                <Link
-                  to="/about"
-                  className="btn-islamic-green px-6 py-3.5 rounded-xl font-bold text-sm flex items-center gap-2"
-                >
-                  Read Full Trust History <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
-                </Link>
-                <Link
-                  to="/transparency"
-                  className="px-6 py-3.5 rounded-xl border-2 border-[#D4AF37] text-[#0F4C36] font-bold text-sm hover:bg-[#FAF7F0] transition-colors"
-                >
-                  View Legal Status
-                </Link>
-              </div>
+            <div className="pt-4 flex flex-wrap items-center gap-4">
+              <Link
+                to="/about"
+                className="btn-islamic-green px-6 py-3.5 rounded-xl font-bold text-sm flex items-center gap-2"
+              >
+                Read Full Trust History <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
+              </Link>
+              <Link
+                to="/transparency"
+                className="px-6 py-3.5 rounded-xl border-2 border-[#D4AF37] text-[#0F4C36] font-bold text-sm hover:bg-[#FAF7F0] transition-colors"
+              >
+                View Legal Status
+              </Link>
             </div>
           </div>
         </div>
