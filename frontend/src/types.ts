@@ -47,6 +47,18 @@ export interface GalleryItem {
   caption?: string;
 }
 
+export interface BeforeAfterSet {
+  id: string;
+  title: string;
+  category: 'masjid' | 'kabristan' | 'facilities' | 'community';
+  description: string;
+  beforeImage: string;
+  afterImage: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+  completedDate?: string;
+}
+
 export interface BurialRuleCategory {
   title: string;
   icon: string;
