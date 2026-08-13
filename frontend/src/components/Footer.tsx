@@ -81,6 +81,10 @@ export const Footer: React.FC = () => {
             © {new Date().getFullYear()} Zakariya Masjid &amp; Kabristan, Pune. All rights reserved.
           </div>
 
+          <div className="text-center font-semibold text-[#0F4C36]">
+            Made by <span className="text-[#B8860B] font-bold">WaterLemon Digital</span>
+          </div>
+
           <div className="flex items-center gap-6">
             <Link to="/policies" className="hover:text-[#0F4C36] transition-colors">
               Privacy Policy &amp; Terms

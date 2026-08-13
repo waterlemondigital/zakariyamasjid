@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-green: #0F4C36;
+  --color-secondary-emerald: #1C6B4A;
+  --color-accent-gold: #D4AF37;
+  --color-gold-dark: #B8860B;
+  --color-gold-light: #F3E5AB;
+  --color-gold-deep: #8C620B;
+  --color-ivory: #FAF7F0;
+  --color-charcoal: #22261F;
+
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-arabic: 'Amiri', 'Scheherazade New', serif;
+}
+
+/* Metallic Gold Gradients */
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 40%, #F5E0A3 60%, #AA7C11 100%);
+}
+
+.gold-gradient-dark-bg {
+  background: linear-gradient(135deg, #0F4C36 0%, #155A41 50%, #0B3A29 100%);
+}
+
+.gold-metallic-text {
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 35%, #F5E0A3 65%, #996515 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-light-text {
+  background: linear-gradient(135deg, #FFF5D1 0%, #F3E5AB 50%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Islamic Geometric Star Pattern */
+.islamic-pattern-subtle {
+  background-color: #FAF7F0;
+  background-image: radial-gradient(rgba(212, 175, 55, 0.25) 1.2px, transparent 1.2px), 
+                    radial-gradient(rgba(184, 134, 11, 0.2) 1.2px, #FAF7F0 1.2px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+}
+
+.islamic-pattern-dark {
+  background-color: #0F4C36;
+  background-image: 
+    radial-gradient(rgba(212, 175, 55, 0.25) 1.5px, transparent 1.5px),
+    linear-gradient(to right, rgba(212, 175, 55, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Islamic Gold & Green Buttons */
+.btn-islamic-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #996515 100%);
+  color: #0F4C36;
+  font-weight: 800;
+  border: 1px solid #F5E0A3;
+  box-shadow: 0 4px 15px rgba(184, 134, 11, 0.25);
+  transition: all 0.25s ease;
+}
+
+.btn-islamic-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+  background: linear-gradient(135deg, #C59B27 0%, #F3E5AB 50%, #B8860B 100%);
+}
+
+.btn-islamic-green {
+  position: relative;
+  overflow: hidden;
+  background: #0F4C36;
+  color: #FFFFFF;
+  font-weight: 700;
+  border: 1.5px solid #D4AF37;
+  box-shadow: 0 4px 15px rgba(15, 76, 54, 0.25);
+  transition: all 0.25s ease;
+}
+
+.btn-islamic-green:hover {
+  transform: translateY(-1px);
+  border-color: #F5E0A3;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+  background: #155A41;
+}
+
+/* Arch Cards */
+.arch-card-top {
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #0F4C36;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}

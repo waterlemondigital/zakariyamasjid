@@ -65,11 +65,20 @@ export interface BurialRuleCategory {
   rules: string[];
 }
 
+export interface IBankDetails {
+  accountHolderName: string;
+  bankName: string;
+  accountNumber: string;
+  ifscCode: string;
+  upiId?: string;
+  branchName?: string;
+}
+
 export interface NeedyProfile {
   id: string;
   caseNumber: string;
   title: string;
-  category: 'Medical Relief' | 'Ration & Food' | 'Orphan Education' | 'Widow Support' | 'Housing Emergency';
+  category: 'Medical Relief' | 'Ration & Food' | 'Orphan Education' | 'Widow Support' | 'Housing Emergency' | 'General Welfare';
   beneficiaryName: string;
   location: string;
   story: string;
@@ -79,4 +88,5 @@ export interface NeedyProfile {
   urgency: 'Critical' | 'High' | 'Moderate';
   isZakatEligible: boolean;
   imageUrl?: string;
+  bankDetails?: IBankDetails;
 }
