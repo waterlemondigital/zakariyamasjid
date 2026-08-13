@@ -94,20 +94,27 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 // 9. Start Server & Connect Database
-const startServer = async () => {
+let serverStarted = false;
+export const startServer = async () => {
+  if (serverStarted) return;
+  serverStarted = true;
   const isConnected = await connectDB();
   if (isConnected) {
     await seedDatabase();
   }
 
-  app.listen(PORT, () => {
-    console.log(`\n🕌 ──────────────────────────────────────────────────────────`);
-    console.log(`   Zakariya Masjid & Kabrastan Trust — Backend API`);
-    console.log(`   Running on port : http://localhost:${PORT}`);
-    console.log(`   Health Check    : http://localhost:${PORT}/api/health`);
-    console.log(`   Environment     : ${process.env.NODE_ENV || 'development'}`);
-    console.log(`────────────────────────────────────────────────────────────\n`);
-  });
+  if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
+    app.listen(PORT, () => {
+      console.log(`\n🕌 ──────────────────────────────────────────────────────────`);
+      console.log(`   Zakariya Masjid & Kabrastan Trust — Backend API`);
+      console.log(`   Running on port : http://localhost:${PORT}`);
+      console.log(`   Health Check    : http://localhost:${PORT}/api/health`);
+      console.log(`   Environment     : ${process.env.NODE_ENV || 'development'}`);
+      console.log(`────────────────────────────────────────────────────────────\n`);
+    });
+  }
 };
 
 startServer();
+
+export default app;
