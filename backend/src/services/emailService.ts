@@ -13,29 +13,27 @@ interface ContactEmailPayload {
  * Creates Nodemailer Transporter based on Environment Variables
  */
 export const getTransporter = () => {
-  const host = process.env.SMTP_HOST;
-  const port = Number(process.env.SMTP_PORT) || 587;
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
+  const host = process.env.SMTP_HOST || 'smtpout.secureserver.net';
+  const port = Number(process.env.SMTP_PORT) || 465;
+  const user = process.env.SMTP_USER || 'contact@zakariyamasjid.org';
+  const pass = process.env.SMTP_PASSWORD || process.env.SMTP_PASS;
+  const isSecure = process.env.SMTP_SECURE === 'true' || port === 465;
 
   if (host && user && pass) {
-    const isPort465 = port === 465;
-
     return nodemailer.createTransport({
       host,
       port,
-      secure: isPort465, // true for 465, false for 587
+      secure: isSecure, // true for 465 (SSL)
       auth: {
         user,
         pass,
       },
       tls: {
-        // Do not fail on invalid certificates or corporate proxies
         rejectUnauthorized: false,
       },
-      connectionTimeout: 10000, // 10s connection timeout
-      greetingTimeout: 10000,
-      socketTimeout: 15000,
+      connectionTimeout: 15000,
+      greetingTimeout: 15000,
+      socketTimeout: 20000,
     });
   }
 
