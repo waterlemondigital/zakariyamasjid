@@ -60,20 +60,26 @@ export const submitContactMessage = async (req: Request, res: Response): Promise
       });
     }
 
-    // Asynchronously dispatch email notification to contact@zakariyamasjid.org (non-blocking)
-    sendContactNotificationEmail({
-      name: cleanName,
-      email: cleanEmail,
-      phone: cleanPhone,
-      subject: cleanSubject,
-      message: cleanMessage,
-      inquiryId: (savedMessage as any)._id,
-    }).catch((err) => console.error('Background email dispatch notice:', err));
+    // Await email dispatch before returning so Vercel serverless doesn't freeze the socket
+    let emailResult = { success: false };
+    try {
+      emailResult = await sendContactNotificationEmail({
+        name: cleanName,
+        email: cleanEmail,
+        phone: cleanPhone,
+        subject: cleanSubject,
+        message: cleanMessage,
+        inquiryId: (savedMessage as any)._id,
+      });
+    } catch (err: any) {
+      console.error('Background email dispatch exception:', err.message);
+    }
 
     res.status(201).json({
       success: true,
       message: 'JazakAllah Khair. Your inquiry has been sent to the Trust administration. We will get back to you shortly.',
       inquiryId: (savedMessage as any)._id,
+      emailDispatched: emailResult.success,
     });
   } catch (error: any) {
     console.error('Error submitting contact message:', error);
@@ -82,6 +88,23 @@ export const submitContactMessage = async (req: Request, res: Response): Promise
       message: error.message || 'Failed to submit your message. Please try again or call us directly.',
     });
   }
+};
+
+/**
+ * @desc    Test/Verify SMTP configuration live
+ * @route   GET /api/contact/verify-smtp
+ * @access  Public / Admin
+ */
+export const verifySmtpStatus = async (_req: Request, res: Response): Promise<void> => {
+  const { testSmtpConnection } = await import('../services/emailService');
+  const result = await testSmtpConnection();
+  res.status(result.success ? 200 : 500).json({
+    ...result,
+    smtpUser: process.env.SMTP_USER || 'Not set',
+    smtpHost: process.env.SMTP_HOST || 'Not set',
+    smtpPort: process.env.SMTP_PORT || 'Not set',
+    notificationEmail: process.env.NOTIFICATION_EMAIL || 'Not set',
+  });
 };
 
 /**

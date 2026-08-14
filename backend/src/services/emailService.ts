@@ -12,21 +12,30 @@ interface ContactEmailPayload {
 /**
  * Creates Nodemailer Transporter based on Environment Variables
  */
-const getTransporter = () => {
+export const getTransporter = () => {
   const host = process.env.SMTP_HOST;
   const port = Number(process.env.SMTP_PORT) || 587;
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
 
   if (host && user && pass) {
+    const isPort465 = port === 465;
+
     return nodemailer.createTransport({
       host,
       port,
-      secure: port === 465, // true for 465, false for other ports
+      secure: isPort465, // true for 465, false for 587
       auth: {
         user,
         pass,
       },
+      tls: {
+        // Do not fail on invalid certificates or corporate proxies
+        rejectUnauthorized: false,
+      },
+      connectionTimeout: 10000, // 10s connection timeout
+      greetingTimeout: 10000,
+      socketTimeout: 15000,
     });
   }
 
@@ -45,11 +54,43 @@ const getTransporter = () => {
 };
 
 /**
+ * Tests SMTP credentials and returns status report
+ */
+export const testSmtpConnection = async (): Promise<{ success: boolean; message: string; details?: any }> => {
+  const transporter = getTransporter();
+  if (!transporter) {
+    return {
+      success: false,
+      message: 'SMTP credentials (SMTP_HOST, SMTP_USER, SMTP_PASS) are not configured in environment variables.',
+    };
+  }
+
+  try {
+    await transporter.verify();
+    return {
+      success: true,
+      message: 'SMTP connection verified successfully with mail server!',
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: `SMTP verification failed: ${error.message}`,
+      details: {
+        code: error.code,
+        response: error.response,
+        responseCode: error.responseCode,
+        command: error.command,
+      },
+    };
+  }
+};
+
+/**
  * Dispatches an HTML notification email to contact@zakariyamasjid.org
  */
 export const sendContactNotificationEmail = async (
   payload: ContactEmailPayload
-): Promise<boolean> => {
+): Promise<{ success: boolean; messageId?: string; error?: string }> => {
   const recipientEmail = process.env.NOTIFICATION_EMAIL || 'contact@zakariyamasjid.org';
   const transporter = getTransporter();
 
@@ -148,18 +189,18 @@ export const sendContactNotificationEmail = async (
   `;
 
   if (!transporter) {
-    console.log(`\n📧 [EMAIL NOTIFICATION DISPATCH SIMULATION]`);
-    console.log(`To: ${recipientEmail}`);
-    console.log(`From: ${payload.name} <${payload.email}>`);
-    console.log(`Phone: ${payload.phone}`);
-    console.log(`Subject: [Zakariya Trust Inquiry] ${payload.subject} - ${payload.name}`);
-    console.log(`Note: Configure SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS in backend/.env to send via live mail server.\n`);
-    return true;
+    console.warn(`[EMAIL NOTICE] No SMTP transporter configured. Notification logged locally for ${recipientEmail}`);
+    return {
+      success: false,
+      error: 'SMTP not configured in environment variables',
+    };
   }
 
   try {
+    const fromAddress = process.env.SMTP_FROM || process.env.SMTP_USER || 'contact@zakariyamasjid.org';
+
     const info = await transporter.sendMail({
-      from: `"Zakariya Masjid Website" <${process.env.SMTP_FROM || process.env.SMTP_USER || 'no-reply@zakariyamasjid.org'}>`,
+      from: `"Zakariya Masjid Website" <${fromAddress}>`,
       to: recipientEmail,
       replyTo: `${payload.name} <${payload.email}>`,
       subject: `[New Inquiry] ${payload.subject} - from ${payload.name}`,
@@ -168,9 +209,15 @@ export const sendContactNotificationEmail = async (
     });
 
     console.log(`✅ Notification email dispatched successfully: ${info.messageId} to ${recipientEmail}`);
-    return true;
+    return {
+      success: true,
+      messageId: info.messageId,
+    };
   } catch (error: any) {
     console.error(`⚠️ Failed to send notification email: ${error.message}`);
-    return false;
+    return {
+      success: false,
+      error: error.message,
+    };
   }
 };
