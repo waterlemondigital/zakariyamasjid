@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { WelfareCase, IWelfareCase } from '../models/WelfareCase';
 import { mockStore } from '../utils/mockStore';
+import { sanitizeString, sanitizeHtmlString, escapeRegex } from '../utils/sanitize';
 
 // ──────────────────────────────────────────────────────────
 // PUBLIC CONTROLLER METHODS
@@ -30,8 +31,32 @@ export const submitApplication = async (req: Request, res: Response): Promise<vo
       return;
     }
 
-    const cleanCategory = category || 'Medical Relief';
-    const targetAmount = Number(amountNeeded) || 0;
+    const validCategories = [
+      'Medical Relief',
+      'Ration & Food',
+      'Orphan Education',
+      'Widow Support',
+      'Housing Emergency',
+      'General Welfare',
+    ] as const;
+
+    const cleanFullName = sanitizeHtmlString(sanitizeString(fullName, 100));
+    const cleanPhone = sanitizeString(phone, 30);
+    const cleanAddress = sanitizeHtmlString(sanitizeString(address, 300));
+    const cleanCategory: typeof validCategories[number] = validCategories.includes(category as any)
+      ? (category as typeof validCategories[number])
+      : 'Medical Relief';
+    const cleanDescription = sanitizeHtmlString(sanitizeString(description, 4000));
+    const targetAmount = Math.max(0, Math.min(Number(amountNeeded) || 0, 10000000)); // Max 1 crore boundary
+
+    const cleanBank = {
+      accountHolderName: sanitizeHtmlString(sanitizeString(bankDetails?.accountHolderName || cleanFullName, 100)),
+      bankName: sanitizeHtmlString(sanitizeString(bankDetails?.bankName, 100)),
+      accountNumber: sanitizeString(bankDetails?.accountNumber, 40).replace(/[^0-9A-Za-z]/g, ''),
+      ifscCode: sanitizeString(bankDetails?.ifscCode, 20).toUpperCase().replace(/[^0-9A-Z]/g, ''),
+      upiId: sanitizeString(bankDetails?.upiId, 100).toLowerCase(),
+      branchName: sanitizeHtmlString(sanitizeString(bankDetails?.branchName, 100)),
+    };
 
     const isDBConnected = mongoose.connection.readyState === 1;
 
@@ -41,26 +66,19 @@ export const submitApplication = async (req: Request, res: Response): Promise<vo
       const caseNumber = await (WelfareCase as any).generateCaseNumber();
       const newCase = new WelfareCase({
         caseNumber,
-        applicantName: fullName.trim(),
-        applicantPhone: phone.trim(),
-        applicantAddress: address.trim(),
-        title: `${cleanCategory} Assistance Request for ${fullName.trim()}`,
-        beneficiaryDisplayName: `${fullName.trim()} & Family`,
+        applicantName: cleanFullName,
+        applicantPhone: cleanPhone,
+        applicantAddress: cleanAddress,
+        title: `${cleanCategory} Assistance Request for ${cleanFullName}`,
+        beneficiaryDisplayName: `${cleanFullName} & Family`,
         category: cleanCategory,
-        location: address.trim().includes('Pune') ? address.trim() : `${address.trim()}, Pune`,
-        story: description.trim(),
+        location: cleanAddress.includes('Pune') ? cleanAddress : `${cleanAddress}, Pune`,
+        story: cleanDescription,
         targetAmount,
         raisedAmount: 0,
         urgency: 'High',
         isZakatEligible: true,
-        bankDetails: {
-          accountHolderName: bankDetails?.accountHolderName?.trim() || fullName.trim(),
-          bankName: bankDetails?.bankName?.trim() || '',
-          accountNumber: bankDetails?.accountNumber?.trim() || '',
-          ifscCode: bankDetails?.ifscCode?.trim()?.toUpperCase() || '',
-          upiId: bankDetails?.upiId?.trim()?.toLowerCase() || '',
-          branchName: bankDetails?.branchName?.trim() || '',
-        },
+        bankDetails: cleanBank,
         status: 'pending',
         isPubliclyVisible: false,
       });
@@ -68,20 +86,13 @@ export const submitApplication = async (req: Request, res: Response): Promise<vo
       savedCase = await newCase.save();
     } else {
       savedCase = mockStore.add({
-        applicantName: fullName.trim(),
-        applicantPhone: phone.trim(),
-        applicantAddress: address.trim(),
+        applicantName: cleanFullName,
+        applicantPhone: cleanPhone,
+        applicantAddress: cleanAddress,
         category: cleanCategory,
-        story: description.trim(),
+        story: cleanDescription,
         targetAmount,
-        bankDetails: {
-          accountHolderName: bankDetails?.accountHolderName?.trim() || fullName.trim(),
-          bankName: bankDetails?.bankName?.trim() || '',
-          accountNumber: bankDetails?.accountNumber?.trim() || '',
-          ifscCode: bankDetails?.ifscCode?.trim()?.toUpperCase() || '',
-          upiId: bankDetails?.upiId?.trim()?.toLowerCase() || '',
-          branchName: bankDetails?.branchName?.trim() || '',
-        },
+        bankDetails: cleanBank,
         status: 'pending',
       });
     }
@@ -175,8 +186,9 @@ export const getAllCases = async (req: Request, res: Response): Promise<void> =>
       if (category && category !== 'all') {
         filter.category = category;
       }
-      if (search) {
-        const searchRegex = new RegExp(String(search), 'i');
+      if (search && String(search).trim()) {
+        const safeSearch = escapeRegex(String(search).trim());
+        const searchRegex = new RegExp(safeSearch, 'i');
         filter.$or = [
           { caseNumber: searchRegex },
           { applicantName: searchRegex },

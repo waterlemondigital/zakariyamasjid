@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { ContactMessage } from '../models/ContactMessage';
 import { mockStore } from '../utils/mockStore';
 import { sendContactNotificationEmail } from '../services/emailService';
+import { sanitizeString, sanitizeHtmlString, escapeRegex } from '../utils/sanitize';
 
 /**
  * @desc    Submit a new contact inquiry (Public)
@@ -24,7 +25,7 @@ export const submitContactMessage = async (req: Request, res: Response): Promise
 
     // Basic email format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(String(email))) {
       res.status(400).json({
         success: false,
         message: 'Please provide a valid email address.',
@@ -32,11 +33,12 @@ export const submitContactMessage = async (req: Request, res: Response): Promise
       return;
     }
 
-    const cleanName = String(name).trim();
-    const cleanEmail = String(email).trim().toLowerCase();
-    const cleanPhone = String(phone).trim();
-    const cleanSubject = subject ? String(subject).trim() : 'General Inquiry';
-    const cleanMessage = String(message).trim();
+    // Sanitize and enforce maximum safe string boundaries
+    const cleanName = sanitizeHtmlString(sanitizeString(name, 100));
+    const cleanEmail = sanitizeString(email, 150).toLowerCase();
+    const cleanPhone = sanitizeString(phone, 30);
+    const cleanSubject = sanitizeHtmlString(sanitizeString(subject || 'General Inquiry', 100));
+    const cleanMessage = sanitizeHtmlString(sanitizeString(message, 3000));
 
     const isConnected = mongoose.connection.readyState === 1;
     let savedMessage;
@@ -128,7 +130,8 @@ export const getAllContactMessages = async (req: Request, res: Response): Promis
       }
 
       if (search && search.trim()) {
-        const regex = new RegExp(search.trim(), 'i');
+        const safeEscapedSearch = escapeRegex(search.trim());
+        const regex = new RegExp(safeEscapedSearch, 'i');
         query.$or = [
           { name: regex },
           { email: regex },
