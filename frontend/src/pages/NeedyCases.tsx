@@ -164,6 +164,26 @@ export const NeedyCases: React.FC = () => {
           </div>
         </div>
 
+        {/* Demo Cases Disclaimer Banner */}
+        <div className="bg-amber-50/90 border-2 border-amber-300 rounded-2xl p-4 sm:p-5 text-xs text-amber-950 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+          <div className="flex items-start sm:items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-amber-200/90 text-amber-900 flex items-center justify-center flex-shrink-0 font-bold border border-amber-300">
+              <Sparkles className="w-4 h-4 text-amber-700" />
+            </div>
+            <div>
+              <strong className="block text-amber-900 font-bold text-xs uppercase tracking-wider">
+                Illustrative Demo Cases Preview
+              </strong>
+              <p className="text-amber-800/90 text-xs mt-0.5 leading-relaxed">
+                The profiles shown below are <strong>sample demonstration cases</strong> to show donors how verified community welfare cases and direct bank donation details will appear in the future once approved by the Trust.
+              </p>
+            </div>
+          </div>
+          <span className="inline-flex items-center gap-1.5 bg-amber-200 text-amber-900 font-bold text-[11px] px-3 py-1 rounded-full border border-amber-400 whitespace-nowrap self-start sm:self-auto shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-amber-700" /> Sample Layout
+          </span>
+        </div>
+
         {/* Live Synchronization Notice */}
         <div className="flex items-center justify-between bg-white p-4 rounded-2xl border-2 border-[#D4AF37]/50 shadow-sm text-xs">
           <div className="flex items-center gap-2 text-[#0F4C36] font-semibold">
@@ -197,9 +217,14 @@ export const NeedyCases: React.FC = () => {
                   <div className="space-y-4">
                     {/* Card Header & Badges */}
                     <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 pb-3">
-                      <span className="inline-flex items-center gap-1 bg-[#0F4C36]/10 text-[#0F4C36] border border-[#0F4C36]/30 text-[11px] font-bold px-3 py-1 rounded-full">
-                        <Coins className="w-3.5 h-3.5 text-[#B8860B]" /> {profile.category}
-                      </span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="inline-flex items-center gap-1 bg-[#0F4C36]/10 text-[#0F4C36] border border-[#0F4C36]/30 text-[11px] font-bold px-3 py-1 rounded-full">
+                          <Coins className="w-3.5 h-3.5 text-[#B8860B]" /> {profile.category}
+                        </span>
+                        <span className="inline-flex items-center gap-1 bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                          <Sparkles className="w-3 h-3 text-amber-600" /> Demo Case
+                        </span>
+                      </div>
 
                       <div className="flex items-center gap-2">
                         {profile.isZakatEligible && (
