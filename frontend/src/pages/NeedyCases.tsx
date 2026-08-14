@@ -164,23 +164,39 @@ export const NeedyCases: React.FC = () => {
           </div>
         </div>
 
-        {/* Demo Cases Disclaimer Banner */}
-        <div className="bg-amber-50/90 border-2 border-amber-300 rounded-2xl p-4 sm:p-5 text-xs text-amber-950 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
-          <div className="flex items-start sm:items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-amber-200/90 text-amber-900 flex items-center justify-center flex-shrink-0 font-bold border border-amber-300">
-              <Sparkles className="w-4 h-4 text-amber-700" />
+        {/* Demo Cases Disclaimer Banner with Multilingual Support (English, Hindi, Urdu) */}
+        <div className="bg-amber-50/90 border-2 border-amber-300 rounded-2xl p-4 sm:p-6 text-xs text-amber-950 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
+          <div className="flex items-start gap-3.5 flex-1">
+            <div className="w-10 h-10 rounded-xl bg-amber-200/90 text-amber-900 flex items-center justify-center flex-shrink-0 font-bold border border-amber-300 mt-0.5">
+              <Sparkles className="w-5 h-5 text-amber-700" />
             </div>
-            <div>
-              <strong className="block text-amber-900 font-bold text-xs uppercase tracking-wider">
-                Illustrative Demo Cases Preview
-              </strong>
-              <p className="text-amber-800/90 text-xs mt-0.5 leading-relaxed">
-                The profiles shown below are <strong>sample demonstration cases</strong> to show donors how verified community welfare cases and direct bank donation details will appear in the future once approved by the Trust.
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <strong className="block text-amber-950 font-bold text-xs sm:text-sm uppercase tracking-wider">
+                  Illustrative Demo Cases Preview • नमूना केस • نمائشی کیسز
+                </strong>
+              </div>
+
+              {/* 1. English */}
+              <p className="text-amber-900 text-xs leading-relaxed">
+                <strong className="text-amber-950">English:</strong> The profiles shown below are <strong>sample demonstration cases</strong> to show donors how verified community welfare cases and direct bank donation details will appear in the future once approved by the Trust.
+              </p>
+
+              {/* 2. Hindi */}
+              <p className="text-amber-900 text-xs leading-relaxed border-t border-amber-200/80 pt-1.5 font-medium">
+                <strong className="text-amber-950">हिन्दी:</strong> नीचे दिए गए मामले केवल <strong>नमूना (डेमो)</strong> हैं, ताकि दानदाताओं को यह दिखाया जा सके कि ट्रस्ट द्वारा सत्यापन और अनुमोदन के बाद जरूरतमंदों के प्रोफाइल और बैंक विवरण भविष्य में कैसे प्रदर्शित होंगे।
+              </p>
+
+              {/* 3. Urdu */}
+              <p className="text-amber-900 text-xs leading-relaxed border-t border-amber-200/80 pt-1.5 font-arabic text-right sm:text-left text-sm" dir="rtl">
+                <strong className="font-sans font-bold text-xs" dir="ltr">اردو: </strong>
+                نیچے دیے گئے کیسز محض <strong>نمائشی (ڈیمو)</strong> ہیں تاکہ عطیہ دہندگان کو دکھایا جا سکے کہ ٹرسٹ سے تصدیق اور منظوری کے بعد مستحقین کے پروفائل اور براہِ راست بینک اکاؤنٹ کی تفصیلات مستقبل میں کس طرح ظاہر ہوں گی۔
               </p>
             </div>
           </div>
-          <span className="inline-flex items-center gap-1.5 bg-amber-200 text-amber-900 font-bold text-[11px] px-3 py-1 rounded-full border border-amber-400 whitespace-nowrap self-start sm:self-auto shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-amber-700" /> Sample Layout
+
+          <span className="inline-flex items-center gap-1.5 bg-amber-200 text-amber-950 font-bold text-xs px-3.5 py-1.5 rounded-full border border-amber-400 whitespace-nowrap self-start md:self-center shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-amber-700" /> Sample Layout Preview
           </span>
         </div>
 
