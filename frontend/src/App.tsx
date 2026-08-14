@@ -13,22 +13,18 @@ import { Contact } from './pages/Contact';
 import { Policies } from './pages/Policies';
 import { NeedyCases } from './pages/NeedyCases';
 import { NotFound } from './pages/NotFound';
+import { useSEO } from './hooks/useSEO';
 
-// Helper component to scroll to top on route change
-function ScrollToTop() {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
+// Helper component to handle SEO and scroll restoration
+function AppSEO() {
+  useSEO();
   return null;
 }
 
 export default function App() {
   return (
     <Router>
-      <ScrollToTop />
+      <AppSEO />
       <div className="min-h-screen flex flex-col bg-[#FAF7F0] text-[#22261F] font-sans antialiased">
         <Navbar />
         <main className="flex-grow">

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow private paths (if any)
+Disallow: /api/
+
+# Sitemap Location
+Sitemap: https://zakariyamasjid.org/sitemap.xml
