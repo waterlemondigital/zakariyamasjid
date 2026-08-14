@@ -14,8 +14,8 @@ import {
 } from 'lucide-react';
 
 export const Login: React.FC = () => {
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('zakariya@2026');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -145,16 +145,6 @@ export const Login: React.FC = () => {
               )}
             </button>
           </form>
-
-          {/* Helper notice */}
-          <div className="bg-[#FAF7F0] p-3 rounded-xl border border-[#D4AF37]/40 text-[11px] text-[#0F4C36] space-y-1 text-center font-medium">
-            <div>
-              <strong>Default Seed Admin:</strong> <span className="font-mono font-bold">admin</span> / <span className="font-mono font-bold">zakariya@2026</span>
-            </div>
-            <div className="text-gray-500 text-[10px]">
-              (Protected with rate limiting &amp; 12-round bcrypt hash)
-            </div>
-          </div>
         </div>
 
         {/* Footer */}
