@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { ContactMessage } from '../models/ContactMessage';
 import { mockStore } from '../utils/mockStore';
+import { sendContactNotificationEmail } from '../services/emailService';
 
 /**
  * @desc    Submit a new contact inquiry (Public)
@@ -31,27 +32,43 @@ export const submitContactMessage = async (req: Request, res: Response): Promise
       return;
     }
 
+    const cleanName = String(name).trim();
+    const cleanEmail = String(email).trim().toLowerCase();
+    const cleanPhone = String(phone).trim();
+    const cleanSubject = subject ? String(subject).trim() : 'General Inquiry';
+    const cleanMessage = String(message).trim();
+
     const isConnected = mongoose.connection.readyState === 1;
     let savedMessage;
 
     if (isConnected) {
       savedMessage = await ContactMessage.create({
-        name: String(name).trim(),
-        email: String(email).trim().toLowerCase(),
-        phone: String(phone).trim(),
-        subject: subject ? String(subject).trim() : 'General Inquiry',
-        message: String(message).trim(),
+        name: cleanName,
+        email: cleanEmail,
+        phone: cleanPhone,
+        subject: cleanSubject,
+        message: cleanMessage,
         ipAddress: req.ip || req.socket.remoteAddress,
       });
     } else {
       savedMessage = mockStore.createContact({
-        name: String(name).trim(),
-        email: String(email).trim().toLowerCase(),
-        phone: String(phone).trim(),
-        subject: subject ? String(subject).trim() : 'General Inquiry',
-        message: String(message).trim(),
+        name: cleanName,
+        email: cleanEmail,
+        phone: cleanPhone,
+        subject: cleanSubject,
+        message: cleanMessage,
       });
     }
+
+    // Asynchronously dispatch email notification to contact@zakariyamasjid.org (non-blocking)
+    sendContactNotificationEmail({
+      name: cleanName,
+      email: cleanEmail,
+      phone: cleanPhone,
+      subject: cleanSubject,
+      message: cleanMessage,
+      inquiryId: (savedMessage as any)._id,
+    }).catch((err) => console.error('Background email dispatch notice:', err));
 
     res.status(201).json({
       success: true,
