@@ -10,6 +10,7 @@ import {
   PlusCircle,
   Clock,
   Sparkles,
+  MessageSquare,
 } from 'lucide-react';
 
 interface AdminNavbarProps {
@@ -23,6 +24,7 @@ export const AdminNavbar: React.FC<AdminNavbarProps> = ({ onOpenNewCase }) => {
   const navLinks = [
     { name: 'Dashboard', path: '/', icon: LayoutDashboard },
     { name: 'Welfare Cases', path: '/cases', icon: FileCheck2 },
+    { name: 'Contact Inquiries', path: '/contacts', icon: MessageSquare },
   ];
 
   return (

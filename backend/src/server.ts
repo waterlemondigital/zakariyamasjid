@@ -8,6 +8,7 @@ import { seedDatabase } from './utils/seed';
 import authRoutes from './routes/authRoutes';
 import welfareRoutes from './routes/welfareRoutes';
 import adminRoutes from './routes/adminRoutes';
+import contactRoutes from './routes/contactRoutes';
 import { generalLimiter } from './middleware/rateLimiter';
 
 // Load environment variables
@@ -72,6 +73,7 @@ app.get('/api/health', (_req: Request, res: Response) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/welfare-cases', welfareRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/contact', contactRoutes);
 
 // 7. 404 Route Handler
 app.use((req: Request, res: Response) => {

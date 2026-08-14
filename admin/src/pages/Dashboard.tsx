@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../services/api';
-import { WelfareCase, DashboardStats } from '../types';
+import { WelfareCase, DashboardStats, ContactMessage, ContactStats } from '../types';
 import { CaseReviewModal } from '../components/CaseReviewModal';
 import { NewCaseModal } from '../components/NewCaseModal';
 import {
@@ -18,6 +18,10 @@ import {
   PlusCircle,
   ExternalLink,
   Sparkles,
+  MessageSquare,
+  MessageCircle,
+  Phone,
+  Mail,
 } from 'lucide-react';
 
 export const Dashboard: React.FC = () => {
@@ -31,8 +35,15 @@ export const Dashboard: React.FC = () => {
     totalRaised: 0,
   });
 
+  const [contactStats, setContactStats] = useState<ContactStats>({
+    total: 0,
+    unread: 0,
+    read: 0,
+    resolved: 0,
+  });
+
   const [pendingCases, setPendingCases] = useState<WelfareCase[]>([]);
-  const [recentCases, setRecentCases] = useState<WelfareCase[]>([]);
+  const [recentContacts, setRecentContacts] = useState<ContactMessage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCase, setSelectedCase] = useState<WelfareCase | null>(null);
   const [showNewCaseModal, setShowNewCaseModal] = useState(false);
@@ -40,10 +51,11 @@ export const Dashboard: React.FC = () => {
   const loadData = async () => {
     setIsLoading(true);
     try {
-      const [statsRes, pendingRes, allRes] = await Promise.all([
+      const [statsRes, pendingRes, contactStatsRes, contactsRes] = await Promise.all([
         api.getDashboardStats(),
         api.getCases({ status: 'pending' }),
-        api.getCases(),
+        api.getContactStats(),
+        api.getContacts({ status: 'unread' }),
       ]);
 
       if (statsRes.success && statsRes.stats) {
@@ -52,8 +64,11 @@ export const Dashboard: React.FC = () => {
       if (pendingRes.success && pendingRes.cases) {
         setPendingCases(pendingRes.cases);
       }
-      if (allRes.success && allRes.cases) {
-        setRecentCases(allRes.cases.slice(0, 5));
+      if (contactStatsRes.success && contactStatsRes.stats) {
+        setContactStats(contactStatsRes.stats);
+      }
+      if (contactsRes.success && contactsRes.messages) {
+        setRecentContacts(contactsRes.messages.slice(0, 3));
       }
     } catch (err) {
       console.error('Error loading dashboard data:', err);
@@ -167,16 +182,25 @@ export const Dashboard: React.FC = () => {
         {/* Total Applications Card */}
         <div className="bg-white rounded-3xl border-2 border-[#D4AF37]/60 p-6 shadow-lg relative overflow-hidden flex flex-col justify-between hover:border-[#D4AF37] transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-gray-500">Total Records</span>
-            <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-600">
-              <ShieldCheck className="w-5 h-5" />
+            <span className="text-xs font-bold uppercase tracking-wider text-gray-500">Contact Inquiries</span>
+            <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-600">
+              <MessageSquare className="w-5 h-5" />
             </div>
           </div>
 
-          <div className="pt-4">
-            <div className="font-serif text-3xl sm:text-4xl font-bold text-[#0F4C36]">{stats.total}</div>
+          <div className="pt-4 flex items-baseline justify-between">
+            <div className="font-serif text-3xl sm:text-4xl font-bold text-[#0F4C36]">{contactStats.total}</div>
+            {contactStats.unread > 0 && (
+              <span className="inline-flex items-center gap-1 bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">
+                {contactStats.unread} Unread
+              </span>
+            )}
           </div>
-          <p className="text-[11px] text-gray-500 mt-1">All historical applications in database</p>
+          <p className="text-[11px] text-gray-500 mt-1">
+            <Link to="/contacts" className="text-[#0F4C36] font-bold hover:underline">
+              Open Inquiries Inbox →
+            </Link>
+          </p>
         </div>
       </div>
 
@@ -261,6 +285,75 @@ export const Dashboard: React.FC = () => {
                   >
                     <span>Review &amp; Verify</span> <ArrowRight className="w-3.5 h-3.5" />
                   </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Contact Inquiries Recent Stream */}
+      <div className="bg-white rounded-3xl border-2 border-[#D4AF37]/60 p-6 sm:p-8 shadow-xl space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#D4AF37]/30 pb-4">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <MessageSquare className="w-5 h-5 text-[#0F4C36]" />
+              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0F4C36]">
+                Recent Contact Inquiries ({contactStats.unread} Unread)
+              </h2>
+            </div>
+            <p className="text-xs text-[#22261F]/70">
+              General inquiries, burial assistance, and public messages submitted from the contact section.
+            </p>
+          </div>
+
+          <Link
+            to="/contacts"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F4C36] hover:text-[#B8860B] uppercase tracking-wider transition-colors"
+          >
+            <span>Open Inquiries Desk</span> <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {recentContacts.length === 0 ? (
+          <div className="text-center py-8 bg-[#FAF7F0] rounded-2xl border border-[#D4AF37]/40 space-y-2">
+            <CheckCircle2 className="w-8 h-8 text-emerald-600 mx-auto" />
+            <h4 className="font-serif text-base font-bold text-[#0F4C36]">No Unread Inquiries</h4>
+            <p className="text-xs text-gray-500 max-w-sm mx-auto">
+              All contact messages have been reviewed or resolved.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {recentContacts.map((msg) => (
+              <div
+                key={msg._id}
+                className="bg-[#FAF7F0] p-4 rounded-2xl border border-[#D4AF37]/40 space-y-3 flex flex-col justify-between"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[10px] font-bold text-[#0F4C36] bg-white border border-[#D4AF37]/40 px-2 py-0.5 rounded">
+                      {msg.subject}
+                    </span>
+                    <span className="text-[10px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-300">
+                      New
+                    </span>
+                  </div>
+
+                  <h4 className="font-bold text-sm text-[#0F4C36]">{msg.name}</h4>
+                  <p className="text-xs text-gray-600 line-clamp-3 leading-relaxed">
+                    "{msg.message}"
+                  </p>
+                </div>
+
+                <div className="pt-2 border-t border-[#D4AF37]/30 flex items-center justify-between text-xs">
+                  <span className="font-mono text-[11px] text-gray-500">{msg.phone}</span>
+                  <Link
+                    to="/contacts"
+                    className="font-bold text-[#0F4C36] hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>Reply</span> <ArrowRight className="w-3 h-3" />
+                  </Link>
                 </div>
               </div>
             ))}

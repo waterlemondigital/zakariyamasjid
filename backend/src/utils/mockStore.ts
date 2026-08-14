@@ -261,6 +261,141 @@ class MockStore {
       totalRaised,
     };
   }
+
+  // ─────────────────────────────────────────────
+  // CONTACT MESSAGES STORE
+  // ─────────────────────────────────────────────
+  private contacts: Array<{
+    _id: string;
+    name: string;
+    email: string;
+    phone: string;
+    subject: string;
+    message: string;
+    status: 'unread' | 'read' | 'resolved';
+    notes: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }> = [
+    {
+      _id: 'msg-1',
+      name: 'Janab Farooq Ansari',
+      email: 'farooq.ansari@gmail.com',
+      phone: '+91 98220 44556',
+      subject: 'Kabristan & Burial Service',
+      message: 'Assalamu Alaikum. I wanted to inquire about the grave registration and documentation procedure for the family record at Zakariya Kabristan.',
+      status: 'unread',
+      notes: '',
+      createdAt: new Date(Date.now() - 3600000 * 4), // 4 hrs ago
+      updatedAt: new Date(Date.now() - 3600000 * 4),
+    },
+    {
+      _id: 'msg-2',
+      name: 'Sister Maryam Khan',
+      email: 'maryam.k@yahoo.com',
+      phone: '+91 98901 22334',
+      subject: 'Madrasa Admission',
+      message: 'Respected Trustees, I would like to enroll my 7-year-old son in the evening Qur\'an Nazirah and basic Islamic studies batch. Please let me know the timings and teacher details.',
+      status: 'unread',
+      notes: '',
+      createdAt: new Date(Date.now() - 3600000 * 26), // 1 day ago
+      updatedAt: new Date(Date.now() - 3600000 * 26),
+    },
+    {
+      _id: 'msg-3',
+      name: 'Brother Zaid Shaikh',
+      email: 'zaid.shaikh99@gmail.com',
+      phone: '+91 97654 88990',
+      subject: 'Donation Inquiry',
+      message: 'Assalamu Alaikum, we would like to sponsor the Friday Jumu\'ah clean drinking water dispenser maintenance for 1 year. Please share trustee coordinator contact.',
+      status: 'read',
+      notes: 'Informed trustee Brother Tanveer to follow up via phone.',
+      createdAt: new Date(Date.now() - 3600000 * 72), // 3 days ago
+      updatedAt: new Date(Date.now() - 3600000 * 48),
+    },
+  ];
+
+  createContact(data: {
+    name: string;
+    email: string;
+    phone: string;
+    subject: string;
+    message: string;
+  }) {
+    const newMsg = {
+      _id: `msg-${Date.now().toString(36)}`,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      subject: data.subject || 'General Inquiry',
+      message: data.message,
+      status: 'unread' as const,
+      notes: '',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    this.contacts.unshift(newMsg);
+    return newMsg;
+  }
+
+  getAllContacts(status?: string, search?: string) {
+    let result = [...this.contacts];
+
+    if (status && ['unread', 'read', 'resolved'].includes(status)) {
+      result = result.filter((m) => m.status === status);
+    }
+
+    if (search && search.trim()) {
+      const q = search.trim().toLowerCase();
+      result = result.filter(
+        (m) =>
+          m.name.toLowerCase().includes(q) ||
+          m.email.toLowerCase().includes(q) ||
+          m.phone.toLowerCase().includes(q) ||
+          m.subject.toLowerCase().includes(q) ||
+          m.message.toLowerCase().includes(q)
+      );
+    }
+
+    return result;
+  }
+
+  getContactById(id: string) {
+    return this.contacts.find((m) => m._id === id);
+  }
+
+  updateContactStatus(id: string, status: 'unread' | 'read' | 'resolved', notes?: string) {
+    const index = this.contacts.findIndex((m) => m._id === id);
+    if (index === -1) return null;
+
+    const existing = this.contacts[index];
+    const updated = {
+      ...existing,
+      status,
+      notes: notes !== undefined ? notes : existing.notes,
+      updatedAt: new Date(),
+    };
+
+    this.contacts[index] = updated;
+    return updated;
+  }
+
+  deleteContact(id: string): boolean {
+    const initialLen = this.contacts.length;
+    this.contacts = this.contacts.filter((m) => m._id !== id);
+    return this.contacts.length < initialLen;
+  }
+
+  getContactStats() {
+    const total = this.contacts.length;
+    const unread = this.contacts.filter((m) => m.status === 'unread').length;
+    const read = this.contacts.filter((m) => m.status === 'read').length;
+    const resolved = this.contacts.filter((m) => m.status === 'resolved').length;
+
+    return { total, unread, read, resolved };
+  }
 }
 
 export const mockStore = new MockStore();
+

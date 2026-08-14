@@ -4,6 +4,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
 import { CasesManagement } from './pages/CasesManagement';
+import { ContactMessages } from './pages/ContactMessages';
 import { Settings } from './pages/Settings';
 import { AdminNavbar } from './components/AdminNavbar';
 
@@ -61,6 +62,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <CasesManagement />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <ProtectedRoute>
+                <ContactMessages />
               </ProtectedRoute>
             }
           />

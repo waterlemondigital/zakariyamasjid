@@ -1,4 +1,4 @@
-import { WelfareCase, DashboardStats, AdminUser } from '../types';
+import { WelfareCase, DashboardStats, AdminUser, ContactMessage, ContactStats } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
 
@@ -103,4 +103,57 @@ export const api = {
     });
     return res.json();
   },
+
+  // ─────────────────────────────────────────────
+  // Contact Inquiries API
+  // ─────────────────────────────────────────────
+  async getContactStats(): Promise<{ success: boolean; stats: ContactStats }> {
+    const res = await fetch(`${API_BASE}/admin/contacts-stats`, {
+      headers: getHeaders(),
+    });
+    return res.json();
+  },
+
+  async getContacts(params?: { status?: string; search?: string }): Promise<{
+    success: boolean;
+    count: number;
+    messages: ContactMessage[];
+  }> {
+    const query = new URLSearchParams();
+    if (params?.status && params.status !== 'all') query.append('status', params.status);
+    if (params?.search) query.append('search', params.search);
+
+    const res = await fetch(`${API_BASE}/admin/contacts?${query.toString()}`, {
+      headers: getHeaders(),
+    });
+    return res.json();
+  },
+
+  async getContactById(id: string): Promise<{ success: boolean; message: ContactMessage }> {
+    const res = await fetch(`${API_BASE}/admin/contacts/${id}`, {
+      headers: getHeaders(),
+    });
+    return res.json();
+  },
+
+  async updateContactStatus(
+    id: string,
+    payload: { status?: 'unread' | 'read' | 'resolved'; notes?: string }
+  ): Promise<{ success: boolean; message: string; inquiry: ContactMessage }> {
+    const res = await fetch(`${API_BASE}/admin/contacts/${id}/status`, {
+      method: 'PATCH',
+      headers: getHeaders(),
+      body: JSON.stringify(payload),
+    });
+    return res.json();
+  },
+
+  async deleteContact(id: string): Promise<{ success: boolean; message: string }> {
+    const res = await fetch(`${API_BASE}/admin/contacts/${id}`, {
+      method: 'DELETE',
+      headers: getHeaders(),
+    });
+    return res.json();
+  },
 };
+

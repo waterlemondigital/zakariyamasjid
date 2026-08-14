@@ -56,3 +56,26 @@ export interface DashboardStats {
   totalTarget: number;
   totalRaised: number;
 }
+
+export type ContactStatus = 'unread' | 'read' | 'resolved';
+
+export interface ContactMessage {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+  status: ContactStatus;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ContactStats {
+  total: number;
+  unread: number;
+  read: number;
+  resolved: number;
+}
+
