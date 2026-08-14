@@ -84,31 +84,60 @@ export const Masjid: React.FC = () => {
 
         {/* 5. Masjid Arch Gallery Strip */}
         <section className="space-y-6">
-          <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#0F4C36] text-center">
-            Masjid Architecture &amp; Facilities
-          </h2>
+          <div className="text-center space-y-2">
+            <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#0F4C36]">
+              Masjid Architecture &amp; Facilities
+            </h2>
+            <p className="text-xs text-[#22261F]/70">
+              Photographs of Zakariya Masjid, Main Prayer Hall, and Clean Wudhu Facilities in Mundhwa, Pune
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <ArchFrame>
-              <img
-                src="https://images.unsplash.com/photo-1542816417-0983cbe82752?q=80&w=800&auto=format&fit=crop"
-                alt="Main Prayer Hall - Zakariya Masjid"
-                className="w-full h-64 object-cover"
-              />
-            </ArchFrame>
-            <ArchFrame>
-              <img
-                src="https://images.unsplash.com/photo-1590076175571-4b5459efb08c?q=80&w=800&auto=format&fit=crop"
-                alt="Wudu Facilities & Courtyard"
-                className="w-full h-64 object-cover"
-              />
-            </ArchFrame>
-            <ArchFrame>
-              <img
-                src="https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=800&auto=format&fit=crop"
-                alt="Qur'an Madrasa Classrooms"
-                className="w-full h-64 object-cover"
-              />
-            </ArchFrame>
+            {/* 1. Masjid Exterior */}
+            <div className="space-y-3">
+              <ArchFrame>
+                <img
+                  src="/images/zakariyabg.jpeg"
+                  alt="Zakariya Masjid - Main Building & Exterior"
+                  className="w-full h-64 object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </ArchFrame>
+              <div className="text-center bg-white p-3 rounded-2xl border border-[#C9A227]/40 shadow-xs">
+                <span className="font-serif font-bold text-sm text-[#0F4C36] block">Zakariya Masjid Exterior</span>
+                <span className="text-[11px] text-[#22261F]/70">Main Building &amp; Compound, Mundhwa</span>
+              </div>
+            </div>
+
+            {/* 2. Main Prayer Hall */}
+            <div className="space-y-3">
+              <ArchFrame>
+                <img
+                  src="/images/namaz.jpeg"
+                  alt="Main Prayer Hall - Congregational Jamaat Namaz"
+                  className="w-full h-64 object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </ArchFrame>
+              <div className="text-center bg-white p-3 rounded-2xl border border-[#C9A227]/40 shadow-xs">
+                <span className="font-serif font-bold text-sm text-[#0F4C36] block">Main Prayer Hall</span>
+                <span className="text-[11px] text-[#22261F]/70">Congregational Jama'at &amp; Jumu'ah Prayers</span>
+              </div>
+            </div>
+
+            {/* 3. Wadukhana */}
+            <div className="space-y-3">
+              <ArchFrame>
+                <img
+                  src="/images/wadukhana.jpeg"
+                  alt="Wadukhana - Wudu & Ablution Facilities"
+                  className="w-full h-64 object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </ArchFrame>
+              <div className="text-center bg-white p-3 rounded-2xl border border-[#C9A227]/40 shadow-xs">
+                <span className="font-serif font-bold text-sm text-[#0F4C36] block">Wadukhana Facility</span>
+                <span className="text-[11px] text-[#22261F]/70">Clean Running Water &amp; Ablution Area</span>
+              </div>
+            </div>
           </div>
         </section>
 
