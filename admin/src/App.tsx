@@ -7,6 +7,7 @@ import { CasesManagement } from './pages/CasesManagement';
 import { ContactMessages } from './pages/ContactMessages';
 import { Settings } from './pages/Settings';
 import { AdminNavbar } from './components/AdminNavbar';
+import { Analytics } from '@vercel/analytics/react';
 
 // Protected Route Wrapper
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -47,6 +48,7 @@ export default function App() {
   return (
     <AuthProvider>
       <Router>
+        <Analytics />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route

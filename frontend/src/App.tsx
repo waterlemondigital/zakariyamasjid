@@ -14,6 +14,7 @@ import { Policies } from './pages/Policies';
 import { NeedyCases } from './pages/NeedyCases';
 import { NotFound } from './pages/NotFound';
 import { useSEO } from './hooks/useSEO';
+import { Analytics } from '@vercel/analytics/react';
 
 // Helper component to handle SEO and scroll restoration
 function AppSEO() {
@@ -25,6 +26,7 @@ export default function App() {
   return (
     <Router>
       <AppSEO />
+      <Analytics />
       <div className="min-h-screen flex flex-col bg-[#FAF7F0] text-[#22261F] font-sans antialiased">
         <Navbar />
         <main className="flex-grow">
