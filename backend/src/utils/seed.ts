@@ -9,8 +9,8 @@ export const seedDatabase = async (): Promise<void> => {
     const adminCount = await AdminUser.countDocuments();
     if (adminCount === 0) {
       const username = (process.env.DEFAULT_ADMIN_USERNAME || 'admin').toLowerCase();
-      const password = process.env.DEFAULT_ADMIN_PASSWORD || 'zakariya@2026';
-      const email = process.env.DEFAULT_ADMIN_EMAIL || 'trustee@zakariyamasjid.org';
+      const password = process.env.DEFAULT_ADMIN_PASSWORD || 'Zakariya@123';
+      const email = process.env.DEFAULT_ADMIN_EMAIL || 'contact@zakariyamasjid.org';
 
       const salt = await bcrypt.genSalt(12);
       const passwordHash = await bcrypt.hash(password, salt);
