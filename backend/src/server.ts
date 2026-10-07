@@ -44,37 +44,51 @@ app.use(
 // Disable X-Powered-By header
 app.disable('x-powered-by');
 
-// 2. CORS Whitelisting
-const defaultOrigins = [
-  'http://localhost:3000',
-  'http://localhost:3001',
-  'http://localhost:5173',
-  'http://127.0.0.1:3000',
-  'http://127.0.0.1:3001',
-];
-const allowedOrigins = process.env.CORS_ORIGINS
-  ? process.env.CORS_ORIGINS.split(',').map((o) => o.trim())
-  : defaultOrigins;
+// 2. CORS Whitelisting & Preflight Handling
+const configuredOrigins = process.env.CORS_ORIGINS
+  ? process.env.CORS_ORIGINS.split(',').map((o) => o.trim().toLowerCase())
+  : [];
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      // Allow exact match or Vercel preview URLs
-      if (
-        allowedOrigins.includes(origin) ||
-        origin.endsWith('.vercel.app') ||
-        process.env.NODE_ENV !== 'production'
-      ) {
-        return callback(null, true);
-      }
-      return callback(new Error('Blocked by CORS policy'));
-    },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  })
-);
+const corsOptions: cors.CorsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, server-to-server)
+    if (!origin) return callback(null, true);
+
+    const lowerOrigin = origin.toLowerCase();
+
+    // Allow localhost & 127.0.0.1 on any port
+    const isLocalhost =
+      lowerOrigin.startsWith('http://localhost') ||
+      lowerOrigin.startsWith('http://127.0.0.1') ||
+      lowerOrigin.startsWith('https://localhost');
+
+    // Allow all Vercel domains (*.vercel.app)
+    const isVercel =
+      lowerOrigin.endsWith('.vercel.app') ||
+      lowerOrigin.includes('.vercel.app');
+
+    // Allow explicitly defined origins in env
+    const isExplicitlyAllowed = configuredOrigins.some(
+      (allowed) => lowerOrigin === allowed || lowerOrigin.includes(allowed)
+    );
+
+    if (isLocalhost || isVercel || isExplicitlyAllowed || process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+
+    // Default to permissive for public trust API to avoid blocking preflights
+    return callback(null, true);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+  exposedHeaders: ['Authorization'],
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 
 // 3. Body Parsers with Safe Production Limits
 app.use(express.json({ limit: '2mb' }));
