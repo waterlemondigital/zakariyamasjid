@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Logo';
-import { MapPin, Phone, Mail, ShieldCheck, Heart } from 'lucide-react';
+import { MapPin, Phone, Mail, ShieldCheck, Heart, ExternalLink } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -59,9 +59,22 @@ export const Footer: React.FC = () => {
             <div className="space-y-3.5 text-xs md:text-sm text-[#22261F]/90 font-normal">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#B8860B] flex-shrink-0 mt-0.5" />
-                <span>
-                  Zakariya Masjid &amp; Kabristan, Mundhwa, Off Koregaon Park, Pune, Maharashtra, India – 411001
-                </span>
+                <div>
+                  <p>
+                    Zakariya Masjid &amp; Kabristan, Mundhwa, Off Koregaon Park, Pune, Maharashtra, India – 411001
+                  </p>
+                  <div className="mt-1.5">
+                    <a
+                      href="https://maps.app.goo.gl/VoJ82WE71Ay5EipQ7"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-bold text-[#0F4C36] hover:text-[#B8860B] hover:underline text-xs transition-colors"
+                    >
+                      <span>Go to Google Maps</span>
+                      <ExternalLink className="w-3.5 h-3.5 text-[#B8860B]" />
+                    </a>
+                  </div>
+                </div>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-[#B8860B] flex-shrink-0" />

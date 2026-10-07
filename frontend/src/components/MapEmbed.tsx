@@ -53,7 +53,7 @@ export const MapEmbed: React.FC = () => {
 
         <div className="mt-8 pt-4 border-t border-white/20">
           <a
-            href="https://maps.google.com/?q=Ghorpadi+Gaon+Koregaon+Park+Pune"
+            href="https://maps.app.goo.gl/VoJ82WE71Ay5EipQ7"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-islamic-gold w-full py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2"
